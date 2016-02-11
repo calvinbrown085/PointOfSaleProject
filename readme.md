@@ -1,4 +1,4 @@
-## Hello all, on a test branch!!
+## Hello all this is our project!!
 
 ---
 ##### This will be an _awesome_ project!!
