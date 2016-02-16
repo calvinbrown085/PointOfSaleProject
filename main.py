@@ -13,7 +13,8 @@ def index():
 @app.route("/form", methods=["POST"])
 def form():
     email = request.form["email"]
-    print(email)
+    db.storeEmail(email)
+
     return redirect("/")
 
 @app.route("/searchById", methods=["POST"])
@@ -29,6 +30,10 @@ def searchByName():
 @app.route("/inventory")
 def inventory():
     return render_template("inventory.html", items = db.getItems())
+
+@app.route("/emailList")
+def emails():
+    return render_template("emailList.html", items = db.getEmailsInSystem())
 
 if (__name__ == "__main__"):
     app.run()

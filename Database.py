@@ -3,6 +3,8 @@ import json
 class MyDatabase():
 
     def __init__(self):
+        databaseList = []
+        self.emailList = databaseList
         jsonFile = open("items.json", "r").read()
         jsonData = json.loads(jsonFile)
         x = {}
@@ -28,3 +30,10 @@ class MyDatabase():
 
     def getItems(self):
         return self.items
+
+    def storeEmail(self,email):
+        self.emailList.append(email)
+        return self.emailList
+
+    def getEmailsInSystem(self):
+        return self.emailList
