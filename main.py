@@ -25,7 +25,7 @@ def searchById():
 @app.route("/searchByName", methods=["POST"])
 def searchByName():
     results = [db.getByName(str(request.form["nameSearch"]))]
-    return render_template("searchResults.html", results = results)
+    return render_template("searchResultsByName.html", results = results)
 
 @app.route("/inventory")
 def inventory():
