@@ -1,0 +1,56 @@
+Database design
+
+                                                    Database Name InventoryData
+
+                                          Tables:
+                                              Inventory
+                                              User Emails
+                                              Transactions
+                                              Manager Credentials
+                                              Audit Trail
+                                              Log Table
+
+
+
+
+
+
+Descriptions of the tables:
+Inventory:
+This will store the inventory of the store with
+*Name
+*Product Id
+*Original Cost
+*What We Sell for
+*Supplier
+*Type of product
+*How many of the inventory we have
+
+User Emails:
+This table will store user information:
+*User name
+*User Email
+
+Transactions:
+This will store user transactions
+*How the user paid
+*How much they paid
+*What they bought
+
+
+Manager Credentials:
+This will store the managers credentials
+*Username
+*password
+
+Audit Trail:
+This will be the audit trail for the customer
+*Total Profits/Losses
+*Recipts
+*Date of sale
+*Log of transactions
+*Inventory Log
+  Number of items recieved vs number of items sold
+
+Log Table:
+This table will be a log of everything that happens within the P.O.S System
