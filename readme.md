@@ -1,4 +1,4 @@
-## Hello all this is our project!!
+## Hello all this is our project!!    [![Build Status](https://travis-ci.org/ethanphunter/PointOfSaleProject.svg?branch=master)](https://travis-ci.org/ethanphunter/PointOfSaleProject)
 
 ---
 ##### This will be an _awesome_ project!!
