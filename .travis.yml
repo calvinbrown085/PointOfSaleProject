@@ -1,0 +1,8 @@
+language: python
+install: pip install -r requirements.txt
+script: python script.py
+deploy:
+  provider: heroku
+  api_key:
+    secure: n+l3u3ahHfzJ6HlziWQIBiO0IVU+17QPAGQ/fYIfO3nnjxvKzl28AebhwfTk0Yg8/9NWhUjhiVxRKGAa/Drx2FPn10t56v1z1rAoBdNdiP+uBzCeNSjUY8oFZF7z+hynT0rwte/kqbz0PrKUpr0CjIav3wXftHcpDnTki9tDs42wLIV36b+FVIa93PadjyUB6popcgVWUmsxySovYXaykAQWz/eOqrfA/im6A35pBoRnsbE4kpwvQJhoF7W1yZqNfB/NQcx+fsKuZZkQiL0+hKt/GVgnWHTS/9pdgcx5zTiiI1wpKUEnsGoC0zmfX6oXBSoVJcLuSIZZiky/g9LIhuEwSxK31feICz0j9EwJpVYDZdLW7+jvn4aUAHP6DFI/HY87bEDedaa9hFtlE+5aWLmtw1lEUUfNvy9MFLsKOBzCApLIcBKiAkQSFWEnTwYuzMcG9eKwcKxK3kpXQOh0zlbxaumb+8yfR8dtJwNB/77ePBWwmnOoaUcnEzmiy/jSo1jSKIjQ0zs30bzsmqYqzfcM87zxAKg9Ctf7vmOXEBackSQ1WtIJNn+apZYhnSi3M4282rhvVclWJFixYMfz8quXlLwNwqCCseGAX5/Y9zriLCL+upfrx9nGfuaeHQijz7TkMHZhrdVugGk3iLO6JkOcF7SOyDo0M/xjNtBT6qo=
+  app: cryptic-crag-17136
