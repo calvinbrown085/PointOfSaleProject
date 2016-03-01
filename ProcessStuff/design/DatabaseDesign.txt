@@ -3,9 +3,9 @@ Database design
                                                     Database Name InventoryData
 
                                           Tables:
-                                              Inventory
-                                              User Emails
-                                              Transactions
+                                              Product Inventory
+                                              Customer Emails
+                                              Customer Transactions
                                               Manager Credentials
                                               Audit Trail
                                               Log Table
@@ -16,7 +16,7 @@ Database design
 
 
 Descriptions of the tables:
-Inventory:
+Product Inventory:
 This will store the inventory of the store with
 *Name
 *Product Id
@@ -26,13 +26,13 @@ This will store the inventory of the store with
 *Type of product
 *How many of the inventory we have
 
-User Emails:
+Customer Emails:
 This table will store user information:
-*User name
-*User Email
+*Customer name
+*Customer Email
 
-Transactions:
-This will store user transactions
+Customer Transactions:
+This will store customers transactions
 *How the user paid
 *How much they paid
 *What they bought
