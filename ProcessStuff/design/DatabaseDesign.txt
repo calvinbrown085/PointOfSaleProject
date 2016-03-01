@@ -27,7 +27,7 @@ This will store the inventory of the store with
 *How many of the inventory we have
 
 Customer Emails:
-This table will store user information:
+This table will store customer information:
 *Customer name
 *Customer Email
 
