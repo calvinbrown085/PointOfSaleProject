@@ -1,39 +1,62 @@
 import json
+import os
+import psycopg2
+import urlparse
 
-class MyDatabase():
+class Database():
 
     def __init__(self):
-        databaseList = []
-        self.emailList = databaseList
-        jsonFile = open("items.json", "r").read()
-        jsonData = json.loads(jsonFile)
         x = {}
-        y = {}
-        for item in jsonData["items"]:
-            x[str(item["id"])] = str(item["name"])
-            y[str(item["name"])] = str(item["id"])
         self.items = x
-        self.itemsName = y
+        self.users = {}
 
+        urlparse.uses_netloc.append("postgres")
+        url = urlparse.urlparse("postgres://ybctfhowlsvtoe:A-UklGRXznn_sknD-imWVH-jb5@ec2-54-83-57-25.compute-1.amazonaws.com:5432/d2e2d5ufv17e36")
+
+        self.conn = psycopg2.connect(
+            database=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
+        self.cursor = self.conn.cursor()
 
     def getById(self,id):
         try:
             return self.items[id]
         except KeyError:
             return "no match"
-    def getByName(self,name):
-
-        for item in self.itemsName:
-            if item == name:
-                return item
-
 
     def getItems(self):
-        return self.items
+        try:
+            self.cursor.execute("""select * from inventory""")
+        except:
+            return "exception Error"
+        rows = self.cursor.fetchall()
+        if (rows == []):
+            return ""
+        else:
+            return rows[0]
 
-    def storeEmail(self,email):
-        self.emailList.append(email)
-        return self.emailList
+    def getUser(self, username):
+        try:
+            self.cursor.execute("""select customer_name from customer_emails where customer_name = '{}'""".format(username))
+        except:
+            return "exception Error"
+        rows = self.cursor.fetchall()
+        if (rows == []):
+            return ""
+        else:
+            return rows[0][0]
 
     def getEmailsInSystem(self):
-        return self.emailList
+        try:
+            self.cursor.execute("""select * from customer_emails""")
+        except:
+            return "exception Error"
+        rows = self.cursor.fetchall()
+        if (rows == []):
+            return ""
+        else:
+            return rows

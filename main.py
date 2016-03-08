@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
-from Database import MyDatabase
+from Database import Database
 import sqlite3
-db = MyDatabase()
+db = Database()
 app = Flask(__name__)
 
 
