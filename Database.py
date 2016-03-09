@@ -16,7 +16,7 @@ class Database():
             return "no match"
 
     def getItems(self):
-        return query("""select * from inventory""")[0]
+        return query("""select * from inventory""")
 
     def getUser(self, username):
         return query("""select customer_name from customer_emails where customer_name = '{}'""".format(username))
