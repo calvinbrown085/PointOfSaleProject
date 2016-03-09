@@ -12,9 +12,11 @@ conn = psycopg2.connect(
     host=url.hostname,
     port=url.port
 )
+conn.autocommit = True
 cursor = conn.cursor()
 
-def query(queryStatement):
+
+def readQuery(queryStatement):
     try:
         cursor.execute(queryStatement)
     except:
@@ -24,3 +26,9 @@ def query(queryStatement):
         return ""
     else:
         return rows
+
+def writeQuery(queryStatement):
+    try:
+        cursor.execute(queryStatement)
+    except:
+        return "exception Error"

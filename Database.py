@@ -16,10 +16,13 @@ class Database():
             return "no match"
 
     def getItems(self):
-        return query("""select * from inventory""")
+        return readQuery("""select * from inventory""")
 
     def getUser(self, username):
-        return query("""select customer_name from customer_emails where customer_name = '{}'""".format(username))
+        return readQuery("""select customer_name from customer_emails where customer_name = '{}'""".format(username))
 
     def getEmailsInSystem(self):
-        return query("""select * from customer_emails""")
+        return readQuery("""select * from customer_emails""")
+
+    def writeEmailToDatabase(self, customerName, customerEmail):
+        writeQuery("""insert into customer_emails values ('{}','{}')""".format(customerName,customerEmail))
