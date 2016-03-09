@@ -26,3 +26,12 @@ class Database():
 
     def writeEmailToDatabase(self, customerName, customerEmail):
         writeQuery("""insert into customer_emails values ('{}','{}')""".format(customerName,customerEmail))
+
+    def insertNewInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):
+        writeQuery("""insert into inventory values ('{}','{}','{}','{}','{}','{}','{}')""".format(name,productId, originalCost, sellPrice, supplier, productType, amountInStock))
+
+    def insertIntoInventoryLog(self,productId, productsRecieved, productsSold):
+        writeQuery("""insert into inventory_log values ('{}','{}', '{}')""".format(productId, productsRecieved, productsSold))
+
+    def insertNewManagerCredentials(self,username, password):
+        writeQuery("""insert into manager_credentials values ('{}','{}')""".format(username, password))
