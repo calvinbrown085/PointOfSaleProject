@@ -6,7 +6,9 @@
   <body>
     <table border="4" style="width:50%">
       {% for item in items %}
-        <tr><td>{{item}}</td><td>{{items[item]}}</td></tr>
+      <td>
+       {{item}}
+      </td>
       {% endfor %}
     </table>
     <a href="/">back</a>

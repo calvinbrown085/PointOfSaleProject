@@ -1,26 +1,11 @@
 import json
 import os
-import psycopg2
-import urlparse
+from DbConnection import DbConnection
 
 class Database():
-
+    
     def __init__(self):
-        x = {}
-        self.items = x
-        self.users = {}
-
-        urlparse.uses_netloc.append("postgres")
-        url = urlparse.urlparse("postgres://ybctfhowlsvtoe:A-UklGRXznn_sknD-imWVH-jb5@ec2-54-83-57-25.compute-1.amazonaws.com:5432/d2e2d5ufv17e36")
-
-        self.conn = psycopg2.connect(
-            database=url.path[1:],
-            user=url.username,
-            password=url.password,
-            host=url.hostname,
-            port=url.port
-        )
-        self.cursor = self.conn.cursor()
+        self.db = DbConnection()
 
     def getById(self,id):
         try:
@@ -29,34 +14,22 @@ class Database():
             return "no match"
 
     def getItems(self):
-        try:
-            self.cursor.execute("""select * from inventory""")
-        except:
-            return "exception Error"
-        rows = self.cursor.fetchall()
-        if (rows == []):
-            return ""
-        else:
-            return rows[0]
+        return self.db.readQuery("""select * from inventory""")
 
     def getUser(self, username):
-        try:
-            self.cursor.execute("""select customer_name from customer_emails where customer_name = '{}'""".format(username))
-        except:
-            return "exception Error"
-        rows = self.cursor.fetchall()
-        if (rows == []):
-            return ""
-        else:
-            return rows[0][0]
+        return self.db.readQuery("""select customer_name from customer_emails where customer_name = '{}'""".format(username))
 
     def getEmailsInSystem(self):
-        try:
-            self.cursor.execute("""select * from customer_emails""")
-        except:
-            return "exception Error"
-        rows = self.cursor.fetchall()
-        if (rows == []):
-            return ""
-        else:
-            return rows
+        return self.db.readQuery("""select * from customer_emails""")
+
+    def writeEmailToDatabase(self, customerName, customerEmail):
+        self.db.writeQuery("""insert into customer_emails values ('{}','{}')""".format(customerName,customerEmail))
+
+    def insertNewInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):
+        self.db.writeQuery("""insert into inventory values ('{}','{}','{}','{}','{}','{}','{}')""".format(name,productId, originalCost, sellPrice, supplier, productType, amountInStock))
+
+    def insertIntoInventoryLog(self,productId, productsRecieved, productsSold):
+        self.db.writeQuery("""insert into inventory_log values ('{}','{}', '{}')""".format(productId, productsRecieved, productsSold))
+
+    def insertNewManagerCredentials(self,username, password):
+        self.db.writeQuery("""insert into manager_credentials values ('{}','{}')""".format(username, password))
