@@ -40,11 +40,13 @@ This will store customers transactions
 *What they bought
 SIDE NOTE: This will track no user info, just what the customer paid with cash or credit card, and how much and what they bought
 
-Manager Credentials:
+Employee Credentials:
 This will store the managers credentials
 *Username
 *password
+*Are they a manager?
 SIDE NOTE: This is for a manager admin credentials not customers or cashier credentials.
+SIDE NOTE: The 3rd column checks if the employee has manager access or not.
 
 Audit Trail:
 This will be the audit trail for the customer
