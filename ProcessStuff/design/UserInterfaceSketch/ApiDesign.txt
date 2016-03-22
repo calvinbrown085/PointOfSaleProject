@@ -46,4 +46,4 @@ reportBadInventory:
   creates a report for the manager of any spoiled items coming up in the store, so they can order new ones and throw them away
 
 createSale:
-  allows the manager to create a sale on a item by reducing the price of it.
+  allows the manager to create a sale on a item by reducing the price of it by updating the products table.
