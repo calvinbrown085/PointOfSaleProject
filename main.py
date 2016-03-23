@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from Database import Database
 import sqlite3
+
 db = Database()
 app = Flask(__name__)
 
@@ -39,5 +40,9 @@ def inventory():
 def emails():
     return render_template("emailList.html", items = db.getEmailsInSystem())
 
+
+@app.route("/runOneOff")
+def oneOff():
+    runOneOff()
 if (__name__ == "__main__"):
     app.run()
