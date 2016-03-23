@@ -22,9 +22,6 @@ class Database():
     def getEmailsInSystem(self):
         return self.db.readQuery("""select * from customer_emails""")
 
-    def printCreds(self):
-        print(self.db.readQuery("""select * from manager_credentials"""))
-
     def getPasswordForUser(self,username):
         return self.db.readQuery("""select manager_password from manager_credentials where manager_username = '{}'""".format(username))
 
