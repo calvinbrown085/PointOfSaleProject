@@ -17,6 +17,10 @@ def form():
 
     return redirect("/")
 
+@app.route("/writeEmail", methods=["POST"])
+def writeEmail():
+    db.writeEmailToDatabase(str(request.form["customer_name"]),str(request.form["customer_email"]))
+
 @app.route("/searchById", methods=["POST"])
 def searchById():
     results = [db.getById(str(request.form["idSearch"]))]
