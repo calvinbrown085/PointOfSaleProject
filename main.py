@@ -21,6 +21,15 @@ def form():
 def writeEmail():
     db.writeEmailToDatabase(str(request.form["customer_name"]),str(request.form["customer_email"]))
 
+@app.route("/writeTransaction", methods=["POST"])
+def writeTransaction():
+    return "This is a stub to be filled in later"
+
+@app.route("/writeNewInventoryItem", methods=["POST"])
+def writeNewInventoryItem():
+    return "This is a stub to be filled in later"
+
+
 @app.route("/searchById", methods=["POST"])
 def searchById():
     results = [db.getById(str(request.form["idSearch"]))]

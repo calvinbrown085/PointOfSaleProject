@@ -21,10 +21,10 @@ class DbConnection():
         try:
             self.cursor.execute(queryStatement)
         except:
-            return "exception Error"
+            return []
         rows = self.cursor.fetchall()
         if (rows == []):
-            return ""
+            return []
         else:
             return rows
 

@@ -3,15 +3,12 @@ import os
 from DbConnection import DbConnection
 
 class Database():
-    
+
     def __init__(self):
         self.db = DbConnection()
 
     def getById(self,id):
-        try:
-            return self.items[id]
-        except KeyError:
-            return "no match"
+        return self.db.readQuery("""select * from inventory where product_id = '{}'""".format(id))
 
     def getItems(self):
         return self.db.readQuery("""select * from inventory""")
@@ -33,3 +30,5 @@ class Database():
 
     def insertNewManagerCredentials(self,username, password):
         self.db.writeQuery("""insert into manager_credentials values ('{}','{}')""".format(username, password))
+
+    def insertNewTransaction(self,transactionId,amountPaid,paymentType,itemsPurchased)
