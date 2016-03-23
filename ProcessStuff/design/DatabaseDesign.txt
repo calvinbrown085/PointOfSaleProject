@@ -35,6 +35,7 @@ SIDE NOTE: The managers can access this info later
 
 Customer Transactions:
 This will store customers transactions
+*transaction id
 *How the user paid
 *How much they paid
 *What they bought
