@@ -6,7 +6,7 @@ db = Database()
 app = Flask(__name__)
 
 app.config.update(dict(
-    # DEBUG=True,
+    DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 
 @app.route("/")

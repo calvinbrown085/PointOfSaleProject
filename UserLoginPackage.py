@@ -46,11 +46,9 @@ def login(db):
         if (request.method == "POST"):
             passwordHash = db.getPasswordForUser(request.form["username"])
             print(passwordHash)
-            if (passwordHash == ""):
+            if (passwordHash == []):
                 print("No User Found")
                 return abort(401)
-            elif (passwordHash == "exception Error"):
-                return abort(500)
             else:
                 print("Checking password...")
                 if (pwd_context.verify(request.form["password"], passwordHash[0][0])):

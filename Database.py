@@ -23,7 +23,7 @@ class Database():
         return self.db.readQuery("""select * from customer_emails""")
 
     def getPasswordForUser(self,username):
-        return self.db.readQuery("""select manager_password from manager_credentials where manager_username = '{}'""".format(username))
+        return self.db.readQuery("""select password from employee_credentials where username = '{}'""".format(username))
 
     def writeEmailToDatabase(self, customerName, customerEmail):
         self.db.writeQuery("""insert into customer_emails values ('{}','{}')""".format(customerName,customerEmail))
