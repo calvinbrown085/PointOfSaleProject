@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect
 from Database import Database
-import sqlite3
+from UserLoginPackage import login,logout,requireLogin
+
 db = Database()
 app = Flask(__name__)
 
+app.config.update(dict(
+    DEBUG=True,
+    SECRET_KEY='A Very Very Secret Key'))
 
 @app.route("/")
 def index():
@@ -47,6 +51,19 @@ def inventory():
 @app.route("/emailList")
 def emails():
     return render_template("emailList.html", items = db.getEmailsInSystem())
+
+@app.route("/login", methods=["GET","POST"])
+def signIn():
+    return login(db)
+
+@app.route("/logout")
+def signOut():
+    return logout()
+
+@app.route("/secret")
+def secret():
+    requireLogin()
+    return "Logged in!!"
 
 if (__name__ == "__main__"):
     app.run()

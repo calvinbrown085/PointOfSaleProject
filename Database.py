@@ -19,6 +19,9 @@ class Database():
     def getEmailsInSystem(self):
         return self.db.readQuery("""select * from customer_emails""")
 
+    def getPasswordForUser(self,username):
+        return self.db.readQuery("""select password from employee_credentials where username = '{}'""".format(username))
+
     def writeEmailToDatabase(self, customerName, customerEmail):
         self.db.writeQuery("""insert into customer_emails values ('{}','{}')""".format(customerName,customerEmail))
 
@@ -27,9 +30,6 @@ class Database():
 
     def insertIntoInventoryLog(self,productId, productsRecieved, productsSold):
         self.db.writeQuery("""insert into inventory_log values ('{}','{}', '{}')""".format(productId, productsRecieved, productsSold))
-
-    def insertNewManagerCredentials(self,username, password):
-        self.db.writeQuery("""insert into manager_credentials values ('{}','{}')""".format(username, password))
 
     def insertNewTransaction(self,transactionId,amountPaid,paymentType,itemsPurchased):
         self.db.writeQuery("""insert into transactions values ('{}','{}','{}','{}')""".format(transactionId, amountPaid, paymentType, itemsPurchased))
