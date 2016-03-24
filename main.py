@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from Database import Database
-<<<<<<< HEAD
 import sqlite3
-=======
 from UserLoginPackage import login,logout,requireLogin
->>>>>>> b233e961e8f969fbc4a95c86a4753397553b14ca
 
 db = Database()
 app = Flask(__name__)
