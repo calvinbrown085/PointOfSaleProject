@@ -1,10 +1,17 @@
 from flask import Flask, render_template, request, redirect
 from Database import Database
+<<<<<<< HEAD
 import sqlite3
+=======
+from UserLoginPackage import login,logout,requireLogin
+>>>>>>> b233e961e8f969fbc4a95c86a4753397553b14ca
 
 db = Database()
 app = Flask(__name__)
 
+app.config.update(dict(
+    DEBUG=True,
+    SECRET_KEY='A Very Very Secret Key'))
 
 @app.route("/")
 def index():
@@ -21,6 +28,15 @@ def form():
 @app.route("/writeEmail", methods=["POST"])
 def writeEmail():
     db.writeEmailToDatabase(str(request.form["customer_name"]),str(request.form["customer_email"]))
+
+@app.route("/writeTransaction", methods=["POST"])
+def writeTransaction():
+    return "This is a stub to be filled in later"
+
+@app.route("/writeNewInventoryItem", methods=["POST"])
+def writeNewInventoryItem():
+    return "This is a stub to be filled in later"
+
 
 @app.route("/searchById", methods=["POST"])
 def searchById():
@@ -41,8 +57,23 @@ def emails():
     return render_template("emailList.html", items = db.getEmailsInSystem())
 
 
+
 @app.route("/runOneOff")
 def oneOff():
     runOneOff()
+
+@app.route("/login", methods=["GET","POST"])
+def signIn():
+    return login(db)
+
+@app.route("/logout")
+def signOut():
+    return logout()
+
+@app.route("/secret")
+def secret():
+    requireLogin()
+    return "Logged in!!"
+
 if (__name__ == "__main__"):
     app.run()
