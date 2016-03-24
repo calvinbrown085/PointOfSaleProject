@@ -31,4 +31,5 @@ class Database():
     def insertNewManagerCredentials(self,username, password):
         self.db.writeQuery("""insert into manager_credentials values ('{}','{}')""".format(username, password))
 
-    def insertNewTransaction(self,transactionId,amountPaid,paymentType,itemsPurchased)
+    def insertNewTransaction(self,transactionId,amountPaid,paymentType,itemsPurchased):
+        self.db.writeQuery("""insert into transactions values ('{}','{}','{}','{}')""".format(transactionId, amountPaid, paymentType, itemsPurchased))
