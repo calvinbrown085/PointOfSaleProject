@@ -8,10 +8,7 @@ class Database():
         self.db = DbConnection()
 
     def getById(self,id):
-        try:
-            return self.items[id]
-        except KeyError:
-            return "no match"
+        return self.db.readQuery("""select * from inventory where product_id = '{}'""".format(id))
 
     def getItems(self):
         return self.db.readQuery("""select * from inventory""")
@@ -33,3 +30,6 @@ class Database():
 
     def insertIntoInventoryLog(self,productId, productsRecieved, productsSold):
         self.db.writeQuery("""insert into inventory_log values ('{}','{}', '{}')""".format(productId, productsRecieved, productsSold))
+
+    def insertNewTransaction(self,transactionId,amountPaid,paymentType,itemsPurchased):
+        self.db.writeQuery("""insert into transactions values ('{}','{}','{}','{}')""".format(transactionId, amountPaid, paymentType, itemsPurchased))

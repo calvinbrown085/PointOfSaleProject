@@ -30,27 +30,32 @@ Customer Emails:
 This table will store customer information:
 *Customer name
 *Customer Email
+SIDE NOTE:After getting feedback about this, we will ask users to give their email at checkout, they can decline it.
+SIDE NOTE: The managers can access this info later
 
 Customer Transactions:
 This will store customers transactions
 *How the user paid
 *How much they paid
 *What they bought
+SIDE NOTE: This will track no user info, just what the customer paid with cash or credit card, and how much and what they bought
 
-
-Manager Credentials:
+Employee Credentials:
 This will store the managers credentials
 *Username
 *password
+*Are they a manager?
+SIDE NOTE: This is for a manager admin credentials not customers or cashier credentials.
+SIDE NOTE: The 3rd column checks if the employee has manager access or not.
 
 Audit Trail:
 This will be the audit trail for the customer
-*Total Profits/Losses
 *Recipts
 *Date of sale
 *Log of transactions
 *Inventory Log
   Number of items recieved vs number of items sold
+SIDE NOTE: All of this info is available for the manager to look at to see things about the store
 
 Log Table:
 This table will be a log of everything that happens within the P.O.S System

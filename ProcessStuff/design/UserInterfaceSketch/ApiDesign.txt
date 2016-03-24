@@ -1,0 +1,49 @@
+Api Design
+
+This will be a connection between the database and the user interface with endpoints
+All of the endpoints in this table use databases in the database design
+
+Database Endpoints, All of these endpoints will connect to the user interface to grab information from the database.
+
+getItems:
+  This will get all the items in the product inventory table, which will then be shown to the user
+
+getItemsById:
+  This will get all items in the DB, by the product id. Using the product inventory table. Being able to look up products by ID
+
+getCustomerName:
+  This gets a customers name by looking up their email in the database, this will allow a manager to possibly send emails to people by
+  just needing a users email address. This gets looked up in the customer emails table
+
+getEmailsInSystem:
+  This will return all of the emails in the database, for use by the manager to send emails to people or just view how many emails they have
+  This gets looked up in the customer emails table
+
+writeEmailToDatabase:
+  This will take an email from a customer and put it in the database using the customer emails table.
+
+insertNewInventoryItem:
+  This will insert a new inventory item into the product inventory table, for use by the manager to add new products to their inventory
+
+
+insertIntoInventoryLog:
+  This puts a log row in the inventory saying how much products were sold, how many of the product was received and the product id.
+  For use by the manager to view how many items they have received and sold
+
+insertNewManagerCredentials:
+  This is to insert a new set of manager credentials for someone who needs to login to the manager terminal
+
+generateReport:
+  This is a general, endpoint for now eventually there will be more for getting the inventory worth, the best selling items this week,
+  possibly how  many things a cashier sold those general things.
+  We will be outputting this in CSV, comma separated values for the customer
+
+auditTransaction:
+  This will record the transaction #, cost, all the item id's and prices, and the cashier number for later looking up by the managers
+  This adheres to every transaction being saved into the database requested by the customer
+
+reportBadInventory:
+  creates a report for the manager of any spoiled items coming up in the store, so they can order new ones and throw them away
+
+createSale:
+  allows the manager to create a sale on a item by reducing the price of it by updating the products table.
