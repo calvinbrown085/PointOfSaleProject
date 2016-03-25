@@ -1,11 +1,12 @@
 import psycopg2
 import urlparse
+import os
 
 class DbConnection():
 
     def __init__(self):
         urlparse.uses_netloc.append("postgres")
-        url = urlparse.urlparse("postgres://ybctfhowlsvtoe:A-UklGRXznn_sknD-imWVH-jb5@ec2-54-83-57-25.compute-1.amazonaws.com:5432/d2e2d5ufv17e36")
+        url = urlparse.urlparse(os.environ["DATABASE_URL"])
         self.conn = psycopg2.connect(
             database=url.path[1:],
             user=url.username,
