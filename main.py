@@ -54,11 +54,6 @@ def emails():
     return render_template("emailList.html", items = db.getEmailsInSystem())
 
 
-
-@app.route("/runOneOff")
-def oneOff():
-    runOneOff()
-
 @app.route("/login", methods=["GET","POST"])
 def signIn():
     return login(db)
