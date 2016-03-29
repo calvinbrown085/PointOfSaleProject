@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect
 from Database import Database
 from UserLoginPackage import login,logout,requireLogin
-
+from DatabaseUtils import *
 db = Database()
 app = Flask(__name__)
 
 app.config.update(dict(
-    # DEBUG=True,
+    #DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 
 @app.route("/")
@@ -23,7 +23,7 @@ def form():
 
 @app.route("/writeEmail", methods=["POST"])
 def writeEmail():
-    db.writeEmailToDatabase(str(request.form["customer_name"]),str(request.form["customer_email"]))
+    newCustomer(str(request.form["customer_name"]),str(request.form["customer_email"]))
 
 @app.route("/writeTransaction", methods=["POST"])
 def writeTransaction():
@@ -64,6 +64,10 @@ def signOut():
 def secret():
     requireLogin()
     return "Logged in!!"
+
+@app.route("/tester")
+def tester():
+    newTransaction("cash",40.00,["beef", "milk", "cheese"])
 
 if (__name__ == "__main__"):
     app.run()

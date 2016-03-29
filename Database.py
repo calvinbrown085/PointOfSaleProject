@@ -22,14 +22,29 @@ class Database():
     def getPasswordForUser(self,username):
         return self.db.readQuery("""select password from employee_credentials where username = '{}'""".format(username))
 
+    def getItemsWithLowInventory(self):
+        return self.db.readQuery("""select * from inventory where amount_in_stock < 5""")
+
     def writeEmailToDatabase(self, customerName, customerEmail):
         self.db.writeQuery("""insert into customer_emails values ('{}','{}')""".format(customerName,customerEmail))
 
     def insertNewInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):
         self.db.writeQuery("""insert into inventory values ('{}','{}','{}','{}','{}','{}','{}')""".format(name,productId, originalCost, sellPrice, supplier, productType, amountInStock))
 
+    def updateInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):
+        self.db.writeQuery("""update inventory set name ='{}', product_id = '{}',original_cost = '{}', selling_price = '{}',supplier = '{}',product_type = '{}',amount_in_stock = '{}','{}')""".format(name,productId, originalCost, sellPrice, supplier, productType, amountInStock))
+
     def insertIntoInventoryLog(self,productId, productsRecieved, productsSold):
         self.db.writeQuery("""insert into inventory_log values ('{}','{}', '{}')""".format(productId, productsRecieved, productsSold))
 
+    def totalItemsSoldFromProductId(self,productId):
+        return self.db.readQuery("""select products_sold from inventory_log where product_id = '{}'""".format(productId))
+
+    def totalItemsBoughtFromProductId(self,productId):
+        return self.db.readQuery("""select products_recieved from inventory_log where product_id = '{}'""".format(productId))
+
     def insertNewTransaction(self,transactionId,amountPaid,paymentType,itemsPurchased):
         self.db.writeQuery("""insert into transactions values ('{}','{}','{}','{}')""".format(transactionId, amountPaid, paymentType, itemsPurchased))
+
+    def createSale(self,productId, newPrice):
+        self.db.writeQuery("""update inventory set selling_price = '{}' where product_id = '{}'""".format(newPrice, productId))
