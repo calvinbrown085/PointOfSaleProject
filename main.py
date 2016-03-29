@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect
 from Database import Database
 from UserLoginPackage import login,logout,requireLogin
-
+from DatabaseUtils import *
 db = Database()
 app = Flask(__name__)
 
 app.config.update(dict(
-    # DEBUG=True,
+    #DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 
 @app.route("/")
@@ -64,6 +64,10 @@ def signOut():
 def secret():
     requireLogin()
     return "Logged in!!"
+
+@app.route("/tester")
+def tester():
+    moneyMadeFromProduct(1)
 
 if (__name__ == "__main__"):
     app.run()
