@@ -31,6 +31,9 @@ class Database():
     def insertNewInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):
         self.db.writeQuery("""insert into inventory values ('{}','{}','{}','{}','{}','{}','{}')""".format(name,productId, originalCost, sellPrice, supplier, productType, amountInStock))
 
+    def updateInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):
+        self.db.writeQuery("""update inventory set name ='{}', product_id = '{}',original_cost = '{}', selling_price = '{}',supplier = '{}',product_type = '{}',amount_in_stock = '{}','{}')""".format(name,productId, originalCost, sellPrice, supplier, productType, amountInStock))
+
     def insertIntoInventoryLog(self,productId, productsRecieved, productsSold):
         self.db.writeQuery("""insert into inventory_log values ('{}','{}', '{}')""".format(productId, productsRecieved, productsSold))
 
@@ -42,3 +45,6 @@ class Database():
 
     def insertNewTransaction(self,transactionId,amountPaid,paymentType,itemsPurchased):
         self.db.writeQuery("""insert into transactions values ('{}','{}','{}','{}')""".format(transactionId, amountPaid, paymentType, itemsPurchased))
+
+    def createSale(self,productId, newPrice):
+        self.db.writeQuery("""update inventory set selling_price = '{}' where product_id = '{}'""".format(newPrice, productId))

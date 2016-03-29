@@ -26,5 +26,7 @@ def listToString(itemsPurchasedList):
     newString = ""
     for item in itemsPurchasedList:
         newString = newString + ", " + item
-
     return newString
+
+def createSale(productId, newPrice):
+    db.createSale(productId, newPrice)
