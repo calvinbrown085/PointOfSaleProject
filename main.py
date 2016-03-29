@@ -23,7 +23,7 @@ def form():
 
 @app.route("/writeEmail", methods=["POST"])
 def writeEmail():
-    db.writeEmailToDatabase(str(request.form["customer_name"]),str(request.form["customer_email"]))
+    newCustomer(str(request.form["customer_name"]),str(request.form["customer_email"]))
 
 @app.route("/writeTransaction", methods=["POST"])
 def writeTransaction():
@@ -67,7 +67,7 @@ def secret():
 
 @app.route("/tester")
 def tester():
-    moneyMadeFromProduct(1)
+    newTransaction("cash",40.00,["beef", "milk", "cheese"])
 
 if (__name__ == "__main__"):
     app.run()

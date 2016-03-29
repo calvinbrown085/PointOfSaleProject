@@ -1,4 +1,5 @@
 from Database import Database
+from random import randint
 
 
 db = Database()
@@ -13,3 +14,17 @@ def moneyMadeFromProduct(productId):
     soldAmount = howManySold * productSellPrice
     profit = soldAmount - boughtAmount
     return profit
+
+
+def newCustomer(customerName, customerEmail):
+    db.writeEmailToDatabase(customerName, customerEmail)
+
+def newTransaction(paymentMethod,paymentAmount,itemsPurchasedList):
+    db.insertNewTransaction(randint(0,1000000),paymentMethod,paymentAmount,listToString(itemsPurchasedList))
+
+def listToString(itemsPurchasedList):
+    newString = ""
+    for item in itemsPurchasedList:
+        newString = newString + ", " + item
+
+    return newString
