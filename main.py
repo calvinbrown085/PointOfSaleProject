@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from Database import Database
+import sqlite3
 from UserLoginPackage import login,logout,requireLogin
 from DatabaseUtils import *
 db = Database()
@@ -51,6 +52,7 @@ def inventory():
 @app.route("/emailList")
 def emails():
     return render_template("emailList.html", items = db.getEmailsInSystem())
+
 
 @app.route("/login", methods=["GET","POST"])
 def signIn():
