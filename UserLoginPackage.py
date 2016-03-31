@@ -38,28 +38,23 @@ def logout():
         return redirect("/")
     else:
         session["current_user"] = None
-        print("Logged out")
         session["logged_in"] = False
         return logoutHtml
 
 def login(db):
         if (request.method == "POST"):
             passwordHash = db.getPasswordForUser(request.form["username"])
-            print(passwordHash)
             if (passwordHash == []):
-                print("No User Found")
                 return abort(401)
             else:
-                print("Checking password...")
                 if (pwd_context.verify(request.form["password"], passwordHash[0][0])):
-                    print("password is correct!")
                     session['logged_in'] = True
-                    print("logged_in set")
                     session["current_user"] = request.form["username"]
-                    print(request.form["username"] + " Logged in")
-                    return redirect("/")
+                    if (db.getManagerStatus()[0][0] == 1):
+                        return redirect("/index") #This will need to be changed to point to the manager page.
+                    else:
+                        return redirect("/index")
                 else:
-                    print("Wrong password!!")
                     return abort(401)
         else:
             return loginHtml
