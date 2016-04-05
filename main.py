@@ -69,7 +69,7 @@ def secret():
 
 @app.route("/tester")
 def tester():
-    newTransaction("cash",40.00,["beef", "milk", "cheese"])
+    createSale(1,"1.99")
 
 if (__name__ == "__main__"):
     app.run()
