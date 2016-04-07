@@ -15,17 +15,16 @@
       </tr>
     </table>
     <table border="4" style="width:50%">
-      {% count = 0 %}
       {% for res in results %}
         <tr>
+        {% for newRes in res %}
+
           <td>
-            {{res[count][count]}}
+            {{newRes}}
           </td>
-          <td>
-            {{res[count][count+1]}}
-          </td>
+
+        {% endfor %}
         </tr>
-      {% count += 1 %}
       {% endfor %}
     </table>
     <a href="/">back</a>

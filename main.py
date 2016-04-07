@@ -49,6 +49,8 @@ def searchByName():
 @app.route("/searchEmailsByName", methods=["POST"])
 def searchEmailsByName():
     results = [db.getUser(str(request.form["emailNameSearch"]))]
+    results = results[0]
+    print(results)
     return render_template("searchResultsByName.html", results = results)
 
 @app.route("/inventory")
