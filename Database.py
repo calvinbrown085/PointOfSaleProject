@@ -11,7 +11,6 @@ class Database():
         return self.db.readQuery("""select * from inventory where product_id = '{}'""".format(id))
     def getByName(self,productName):
         productNameLike = str(productName+"%")
-        print(productNameLike)
         return self.db.readQuery("""select * from inventory where name LIKE '{}'""".format(productNameLike))
 
     def getItems(self):
