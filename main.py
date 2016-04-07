@@ -8,7 +8,7 @@ db = Database()
 app = Flask(__name__)
 
 app.config.update(dict(
-    DEBUG=True,
+    #DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 
 @app.route("/")
@@ -78,10 +78,6 @@ def secret():
 @app.route("/methodOfPayment")
 def payment():
     return "Stub implementation"
-
-@app.route("/tester")
-def tester():
-    return db.getNameAndSellingPrice(1)
 
 
 if (__name__ == "__main__"):
