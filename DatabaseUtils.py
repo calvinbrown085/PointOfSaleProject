@@ -41,5 +41,6 @@ def generateReport():
             item = db.getById(productId)
             profit = moneyMadeFromProduct(productId)
 
-            profitString = profitString + str(productId) + ", " + str(item[0][0]) + ", " + str(profit) + ", " + "\n"
+            profitString = profitString + str(productId) + ", " + str(item[0][0]) + ", " + str(profit) + "\n"
+    print(profitString)
     return profitString
