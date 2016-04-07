@@ -8,7 +8,7 @@ db = Database()
 app = Flask(__name__)
 
 app.config.update(dict(
-    #DEBUG=True,
+    DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 
 @app.route("/")
@@ -52,6 +52,12 @@ def searchEmailsByName():
     results = results[0]
     print(results)
     return render_template("searchResultsByName.html", results = results)
+
+@app.route("/pos")
+def posTest():
+    print("test")
+
+    return render_template("POS.html")
 
 @app.route("/inventory")
 def inventory():
