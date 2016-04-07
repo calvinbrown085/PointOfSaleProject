@@ -48,10 +48,10 @@ class Database():
     def insertIntoInventoryLog(self,productId, productsRecieved, productsSold):
         self.db.writeQuery("""insert into inventory_log values ('{}','{}', '{}')""".format(productId, productsRecieved, productsSold))
 
-    def updateInventoryLog(self, productId):
+    def updateInventoryLog(self, productId,howManyPurchased):
         inventoryLogGet = self.getFromInventoryLogByProductId(productId)
-        amountBought = inventoryLogGet[0][1] - 1
-        amountSold =  inventoryLogGet[0][2] - 1
+        amountBought = inventoryLogGet[0][1] - howManyPurchased
+        amountSold =  inventoryLogGet[0][2] - howManyPurchased
         self.db.writeQuery("""update inventory_log set products_recieved = '{}', products_sold = '{}' where product_id = '{}'""".format(amountBought, amountSold, productId))
 
     def totalItemsSoldFromProductId(self,productId):

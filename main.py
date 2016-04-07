@@ -68,6 +68,10 @@ def secret():
     requireLogin()
     return "Logged in!!"
 
+@app.route("/methodOfPayment")
+def payment():
+    return "Stub implementation"
+
 @app.route("/tester")
 def tester():
     return generateReport()

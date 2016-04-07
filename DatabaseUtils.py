@@ -44,3 +44,6 @@ def generateReport():
             profitString = profitString + str(productId) + ", " + str(item[0][0]) + ", " + str(profit) + "\n"
     print(profitString)
     return profitString
+
+def purchasedItems(productId,howManyPurchased):
+    db.updateInventoryLog(productId,howManyPurchased)
