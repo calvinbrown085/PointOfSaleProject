@@ -36,14 +36,19 @@ def writeNewInventoryItem():
     return "This is a stub to be filled in later"
 
 
-@app.route("/searchById", methods=["POST"])
+@app.route("/searchInventoryById", methods=["POST"])
 def searchById():
     results = [db.getById(str(request.form["idSearch"]))]
     return render_template("searchResults.html", results = results)
 
-@app.route("/searchByName", methods=["POST"])
+@app.route("/searchInventoryByName", methods=["POST"])
 def searchByName():
     results = [db.getByName(str(request.form["nameSearch"]))]
+    return render_template("searchResultsByName.html", results = results)
+
+@app.route("/searchEmailsByName", methods=["POST"])
+def searchEmailsByName():
+    results = [db.getUser(str(request.form["emailNameSearch"]))]
     return render_template("searchResultsByName.html", results = results)
 
 @app.route("/inventory")
@@ -74,7 +79,7 @@ def payment():
 
 @app.route("/tester")
 def tester():
-    return generateReport()
+    return db.getNameAndSellingPrice(1)
 
 
 if (__name__ == "__main__"):

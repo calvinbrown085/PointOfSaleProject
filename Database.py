@@ -9,6 +9,10 @@ class Database():
 
     def getById(self,id):
         return self.db.readQuery("""select * from inventory where product_id = '{}'""".format(id))
+
+    def getNameAndSellingPrice(self,productId):
+        return self.db.readQuery("""select name, selling_price from inventory where product_id = '{}'""".format(productId))
+
     def getByName(self,productName):
         productNameLike = str(productName+"%")
         return self.db.readQuery("""select * from inventory where name LIKE '{}'""".format(productNameLike))
@@ -20,7 +24,8 @@ class Database():
         return self.db.readQuery("""select product_id from inventory""")
 
     def getUser(self, username):
-        return self.db.readQuery("""select customer_name from customer_emails where customer_name = '{}'""".format(username))
+        usernameLike = str(username+"%")
+        return self.db.readQuery("""select * from customer_emails where customer_name LIKE '{}'""".format(usernameLike))
 
     def getEmailsInSystem(self):
         return self.db.readQuery("""select * from customer_emails""")

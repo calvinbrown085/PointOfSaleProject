@@ -5,9 +5,27 @@
   </head>
   <body>
     <table border="4" style="width:50%">
+      <tr>
+        <td>
+          Name
+        </td>
+        <td>
+          Email
+        </td>
+      </tr>
+    </table>
+    <table border="4" style="width:50%">
+      {% count = 0 %}
       {% for res in results %}
-        {% print results %}
-        <tr><td>{{res}}</td></tr>
+        <tr>
+          <td>
+            {{res[count][count]}}
+          </td>
+          <td>
+            {{res[count][count+1]}}
+          </td>
+        </tr>
+      {% count += 1 %}
       {% endfor %}
     </table>
     <a href="/">back</a>
