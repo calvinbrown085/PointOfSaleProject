@@ -3,11 +3,12 @@ from Database import Database
 import sqlite3
 from UserLoginPackage import login,logout,requireLogin
 from DatabaseUtils import *
+from OneOffInventoryLog import *
 db = Database()
 app = Flask(__name__)
 
 app.config.update(dict(
-    #DEBUG=True,
+    DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 
 @app.route("/")
@@ -69,7 +70,8 @@ def secret():
 
 @app.route("/tester")
 def tester():
-    createSale(1,"1.99")
+    return generateReport()
+
 
 if (__name__ == "__main__"):
     app.run()

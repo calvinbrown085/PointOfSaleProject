@@ -30,3 +30,16 @@ def listToString(itemsPurchasedList):
 
 def createSale(productId, newPrice):
     db.createSale(productId, newPrice)
+
+
+def generateReport():
+    profitString = "productId, Name, profitOfItem \n"
+    productIds = db.getAllProductIds()
+
+    for t in productIds:
+        for productId in t:
+            item = db.getById(productId)
+            profit = moneyMadeFromProduct(productId)
+
+            profitString = profitString + str(productId) + ", " + str(item[0][0]) + ", " + str(profit) + ", " + "\n"
+    return profitString

@@ -13,6 +13,9 @@ class Database():
     def getItems(self):
         return self.db.readQuery("""select * from inventory""")
 
+    def getAllProductIds(self):
+        return self.db.readQuery("""select product_id from inventory""")
+
     def getUser(self, username):
         return self.db.readQuery("""select customer_name from customer_emails where customer_name = '{}'""".format(username))
 
@@ -25,6 +28,10 @@ class Database():
     def getItemsWithLowInventory(self):
         return self.db.readQuery("""select * from inventory where amount_in_stock < 5""")
 
+
+    def getFromInventoryLogByProductId(self, productId):
+        return self.db.readQuery("""select * from inventory_log where product_id = '{}'""".format(productId))
+
     def writeEmailToDatabase(self, customerName, customerEmail):
         self.db.writeQuery("""insert into customer_emails values ('{}','{}')""".format(customerName,customerEmail))
 
@@ -36,6 +43,12 @@ class Database():
 
     def insertIntoInventoryLog(self,productId, productsRecieved, productsSold):
         self.db.writeQuery("""insert into inventory_log values ('{}','{}', '{}')""".format(productId, productsRecieved, productsSold))
+
+    def updateInventoryLog(self, productId):
+        inventoryLogGet = self.getFromInventoryLogByProductId(productId)
+        amountBought = inventoryLogGet[0][1] - 1
+        amountSold =  inventoryLogGet[0][2] - 1
+        self.db.writeQuery("""update inventory_log set products_recieved = '{}', products_sold = '{}' where product_id = '{}'""".format(amountBought, amountSold, productId))
 
     def totalItemsSoldFromProductId(self,productId):
         return self.db.readQuery("""select products_sold from inventory_log where product_id = '{}'""".format(productId))
