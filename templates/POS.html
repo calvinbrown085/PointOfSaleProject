@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		POS System
+	</title>
+</head>
+<style>
+	#section {
+		float:left;
+		width: 360px;
+	}
+	#nav {
+		float:left;
+		width: 240px;
+	}
+	#other {
+		float: left;
+		width: 360px;
+	}
+	#disp{
+		display:inline-block;
+	}
+	#disp1{
+		display: inline-block;
+	}
+	table{
+		width: 100%;
+	}
+	table, th, td {
+    	border-collapse: collapse;
+	}
+	th{
+		padding-top: 5px;
+    	padding-right: 11px;
+    	padding-bottom: 5px;
+    	padding-left: 11px;
+    	text-align: left;
+	}
+	td {
+    	padding-top: 5px;
+    	padding-bottom: 10px;
+    	padding-left: 2px;
+    	text-align: left;
+	}
+	#IN{
+		float:left;
+		width:112px;
+	}
+	#I{
+		float:left;
+		width:95px;
+	}
+	#Q{
+		float:left;
+		width:81px;
+	}
+	#P{
+		float:left;
+		width:55px;
+	}
+
+</style>
+<body>
+
+	<div id="header">
+		<h1> Bob's Grocery</h1>
+	</div>
+
+	<div id="nav">
+		<button type="button">Manager Page</button><br>
+	</div>
+
+	<div id="section">
+		<form id="tfnewsearch" method="get" action="http://www.google.com">
+		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
+		</form>
+	<div class="tfclear"></div>
+	<br>
+
+
+	<form action="action_page.php">
+  		<select name="items">
+    	<option value="Please Select">Please Select One</option>
+    	<option value="price">Item Price</option>
+    	<option value="id">Product Id</option>
+    	<option value="name">Product Name</option>
+    	<option value="supply">Supplier</option>
+
+
+  	</select>
+  	<input type="submit">
+	</form>
+	<br><br>
+	</div>
+
+<div id="other">
+
+
+
+<!--<script language='JavaScript'>
+
+function getwords(){
+	myOutput=document.getElementById('output');
+
+	textbox = document.getElementById('words');
+
+
+	if (textbox.value != "")
+		myOutput.innerHTML=textbox.value;
+
+
+	else
+		alert("No word has been entered!");
+}
+function getnumbers(){
+	myOutput2=document.getElementById('output1');
+	textbox2=document.getElementById('numbers');
+
+
+	if (textbox2.value != "")
+		myOutput2.innerHTML=textbox2.value;
+
+	else
+		alert("No word has been entered!");
+}
+</script>-->
+
+
+<!--<script type="text/javascript">
+
+var data = new Array(); // creating array
+var id = new Array();
+
+
+
+function add_item(){
+
+	data.push(document.getElementById('item').value); // adding element to array
+
+	document.getElementById('item').value=''; // Making the text box blank
+
+	disp(); // displaying the array elements
+
+}
+
+function disp(){
+
+	var str='';
+
+	for (i=0;i<data.length;i++) {
+		str += data[i] + "<br >";  // adding each element with key number to variable
+	}
+
+	document.getElementById('disp').innerHTML=str; // Display the elements of the array
+}
+
+function add_id(){
+
+	id.push(document.getElementById('id').value); // adding element to array
+
+	document.getElementById('id').value=''; // Making the text box blank
+
+	disp1(); // displaying the array elements
+
+}
+
+function disp1(){
+
+	var str='';
+
+	for (i=0;i<id.length;i++) {
+		str += id[i] + "<br >";  // adding each element with key number to variable
+	}
+
+	document.getElementById('disp1').innerHTML=str; // Display the elements of the array
+}
+
+</script>-->
+
+
+
+	<div style="height:400px;width:360px;border:1px solid #ccc;overflow:auto;">
+
+		<table border="1">
+			<tr>
+				<th>Product Id</th>
+				<th>Item Name</th>
+				<th>Quantity</th>
+				<th>Price</th>
+			</tr>
+		</table>
+
+
+		<table border="0">
+			<tr style="font-size:13px">
+				{% for some in results %}
+				<td><div id="IN" align:'left'>
+				</div> {{some}}</td>
+				<td><div id="I">
+				</div> {{some}} </td>
+
+				<td><div id='Q'>
+					<div> {{some}} </div>
+				</div></td>
+				<td><div id="P">
+					<div> {{some}} </div>
+				</div></td>
+				{% endfor %}
+			</tr>
+		</table>
+
+	</div>
+
+
+	<div align="right">
+	<br>
+	<form action = "/cart" method = "post">
+  		Item Number:
+  		<input type="text" name="ItemNumber"><br></input>
+  		Quantity:
+  		<input type="text" name="quantity"><br></input>
+  		<input type="submit" value="Form">
+	</form>
+
+	<br>
+	<br>
+
+	<a href="link" style="float: right;">Checkout</a>
+	</div>
+
+
+</div>
+</body>
+</html>

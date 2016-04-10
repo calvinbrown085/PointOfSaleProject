@@ -5,7 +5,8 @@ from UserLoginPackage import login,logout,requireLogin
 from DatabaseUtils import *
 db = Database()
 app = Flask(__name__)
-
+resultList = []
+resultCount = 0
 app.config.update(dict(
     DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
@@ -72,9 +73,22 @@ def secret():
     requireLogin()
     return "Logged in!!"
 
-@app.route("/tester")
-def tester():
-    createSale(1,"1.99")
+@app.route("/pos")
+def pos():
+    return render_template("POS.html",results = resultList, count = resultCount)
+
+@app.route("/cart", methods=["POST"])
+def cart():
+    itemNumber = [str(request.form["ItemNumber"])]
+    name = db.getById(int(itemNumber[0]))[0][0]
+    quantity = [int(request.form["quantity"])]
+    price = db.getById(int(itemNumber[0]))[0][3]
+    resultList.append(itemNumber[0])
+    resultList.append(name)
+    resultList.append(quantity[0])
+    resultList.append(price)
+    return render_template("POS.html", results = resultList, count = resultCount)
+
 
 if (__name__ == "__main__"):
     app.run()
