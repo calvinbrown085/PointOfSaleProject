@@ -1,6 +1,7 @@
 import json
 import os
 from DbConnection import DbConnection
+from flask import session
 
 class Database():
 
@@ -32,6 +33,10 @@ class Database():
 
     def getPasswordForUser(self,username):
         return self.db.readQuery("""select password from employee_credentials where username = '{}'""".format(username))
+
+    def getManagerStatus(self):
+        username = session.get("current_user")
+        return self.db.readQuery("""select ismanager from employee_credentials where username = '{}'""".format(username))
 
     def getItemsWithLowInventory(self):
         return self.db.readQuery("""select * from inventory where amount_in_stock < 5""")

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from Database import Database
 import sqlite3
 from UserLoginPackage import login,logout,requireLogin
@@ -10,10 +10,15 @@ app = Flask(__name__)
 app.config.update(dict(
     DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
-
 @app.route("/")
-def index():
+def singleSlash():
+    if (not session.get("logged_in")):
+        return redirect("/login")
+    else:
+        return redirect("/index")
 
+@app.route("/index")
+def index():
     return render_template("index.html")
 
 @app.route("/form", methods=["POST"])
