@@ -196,17 +196,19 @@ function disp1(){
 		<table border="0">
 			<tr style="font-size:13px">
 				{% for some in results %}
-				<td><div id="IN" align:'left'>
-				</div> {{some}}</td>
-				<td><div id="I">
-				</div> {{some}} </td>
+				<tr>
+					<td><div id="IN" align:'left'>
+					</div> {{some[0]}}</td>
+					<td><div id="I">
+					</div> {{some[1]}} </td>
 
-				<td><div id='Q'>
-					<div> {{some}} </div>
-				</div></td>
-				<td><div id="P">
-					<div> {{some}} </div>
-				</div></td>
+					<td><div id='Q'>
+						<div> {{some[2]}} </div>
+					</div></td>
+					<td><div id="P">
+						<div> {{some[3]}} </div>
+					</div></td>
+				</tr>
 				{% endfor %}
 			</tr>
 		</table>

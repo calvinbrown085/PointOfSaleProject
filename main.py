@@ -82,12 +82,11 @@ def cart():
     itemNumber = [str(request.form["ItemNumber"])]
     name = db.getById(int(itemNumber[0]))[0][0]
     quantity = [int(request.form["quantity"])]
-    price = db.getById(int(itemNumber[0]))[0][3]
-    resultList.append(itemNumber[0])
-    resultList.append(name)
-    resultList.append(quantity[0])
-    resultList.append(price)
-    return render_template("POS.html", results = resultList, count = resultCount)
+    price = db.getById(int(itemNumber[0]))[0][3] * quantity[0]
+    itemList = [itemNumber[0], name, quantity[0], price]
+    resultList.append(itemList)
+    print(resultList)
+    return render_template("POS.html", results = resultList)
 
 
 if (__name__ == "__main__"):
