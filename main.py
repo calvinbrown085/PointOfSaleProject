@@ -3,12 +3,13 @@ from Database import Database
 import sqlite3
 from UserLoginPackage import login,logout,requireLogin
 from DatabaseUtils import *
+from OneOffInventoryLog import *
 db = Database()
 app = Flask(__name__)
 resultList = []
 resultCount = 0
 app.config.update(dict(
-    DEBUG=True,
+    # DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 @app.route("/")
 def singleSlash():
@@ -41,15 +42,28 @@ def writeNewInventoryItem():
     return "This is a stub to be filled in later"
 
 
-@app.route("/searchById", methods=["POST"])
+@app.route("/searchInventoryById", methods=["POST"])
 def searchById():
     results = [db.getById(str(request.form["idSearch"]))]
     return render_template("searchResults.html", results = results)
 
-@app.route("/searchByName", methods=["POST"])
+@app.route("/searchInventoryByName", methods=["POST"])
 def searchByName():
     results = [db.getByName(str(request.form["nameSearch"]))]
     return render_template("searchResultsByName.html", results = results)
+
+@app.route("/searchEmailsByName", methods=["POST"])
+def searchEmailsByName():
+    results = [db.getUser(str(request.form["emailNameSearch"]))]
+    results = results[0]
+    print(results)
+    return render_template("searchResultsByName.html", results = results)
+
+@app.route("/pos")
+def posTest():
+    print("test")
+
+    return render_template("POS.html")
 
 @app.route("/inventory")
 def inventory():
@@ -73,6 +87,7 @@ def secret():
     requireLogin()
     return "Logged in!!"
 
+<<<<<<< HEAD
 @app.route("/pos")
 def pos():
     return render_template("POS.html",results = resultList, count = resultCount)
@@ -92,6 +107,11 @@ def cart():
 @app.route("/checkout")
 def checkout():
     return "This will be the checkout page"
+=======
+@app.route("/methodOfPayment")
+def payment():
+    return "Stub implementation"
+>>>>>>> 3990fb5b4019545cb240e28b830cdf7740ade689
 
 
 if (__name__ == "__main__"):

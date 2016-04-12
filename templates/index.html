@@ -15,16 +15,23 @@
         <input type="submit" name="form"></input>
       </fieldset>
     </form>
-    <form action="/searchByName" method="post">
+    <form action="/searchEmailsByName" method="post">
       <fieldset>
-        Search By Name:<br>
+        Search Emails By Name:<br>
+        <input type="text" name="emailNameSearch"></input>
+        <input type="submit" name="Form">
+      </fieldset>
+    </form>
+    <form action="/searchInventoryByName" method="post">
+      <fieldset>
+        Search Inventory By Name:<br>
         <input type="text" name="nameSearch"></input>
         <input type="submit" name="Form">
       </fieldset>
     </form>
-    <form action="/searchById" method="post">
+    <form action="/searchInventoryById" method="post">
       <fieldset>
-        Search By Id:<br>
+        Search Inventory By Id:<br>
         <input type="text" name="idSearch"></input>
         <input type="submit" name="Form">
       </fieldset>
