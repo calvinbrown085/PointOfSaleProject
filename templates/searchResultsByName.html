@@ -5,9 +5,26 @@
   </head>
   <body>
     <table border="4" style="width:50%">
+      <tr>
+        <td>
+          Name
+        </td>
+        <td>
+          Email
+        </td>
+      </tr>
+    </table>
+    <table border="4" style="width:50%">
       {% for res in results %}
-        {% print results %}
-        <tr><td>{{res}}</td></tr>
+        <tr>
+        {% for newRes in res %}
+
+          <td>
+            {{newRes}}
+          </td>
+
+        {% endfor %}
+        </tr>
       {% endfor %}
     </table>
     <a href="/">back</a>
