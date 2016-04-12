@@ -73,14 +73,14 @@
 	</div>
 
 	<div id="section">
-		<form id="tfnewsearch" method="get" action="http://www.google.com">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
+		<form id="tfnewsearch" method="post" action="/searchByName">
+		        <input type="text" class="tftextinput" name="nameSearch" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	<br>
 
 
-	<form action="action_page.php">
+	<form action="/checkerSearch" method = "post">
   		<select name="items">
     	<option value="Please Select">Please Select One</option>
     	<option value="price">Item Price</option>
@@ -90,10 +90,11 @@
 
 
   	</select>
-  	<input type="submit">
+  	<input type="submit" value="Form">
 	</form>
 	<br><br>
 	</div>
+
 
 <div id="other">
 
@@ -225,11 +226,18 @@ function disp1(){
   		<input type="text" name="quantity"><br></input>
   		<input type="submit" value="Form">
 	</form>
+	<div align = "left">
+		<br>
+		Total Amount:
+		{{totalPrice}}
+
+	</div>
 
 	<br>
 	<br>
 
-	<a href="link" style="float: right;">Checkout</a>
+
+	<a href="/checkout" style="float: right;">Checkout</a>
 	</div>
 
 
