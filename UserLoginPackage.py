@@ -50,10 +50,12 @@ def login(db):
                 if (pwd_context.verify(request.form["password"], passwordHash[0][0])):
                     session['logged_in'] = True
                     session["current_user"] = request.form["username"]
+                    session["resultList"] = []
+                    session["totalAmount"] = 0
                     if (db.getManagerStatus()[0][0] == 1):
-                        return redirect("/index") #This will need to be changed to point to the manager page.
+                        return redirect("/pos") #This will need to be changed to point to the manager page.
                     else:
-                        return redirect("/index")
+                        return redirect("/pos")
                 else:
                     return abort(401)
         else:

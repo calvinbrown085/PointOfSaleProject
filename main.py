@@ -4,10 +4,13 @@ import sqlite3
 from UserLoginPackage import login,logout,requireLogin
 from DatabaseUtils import *
 from OneOffInventoryLog import *
+
 db = Database()
 app = Flask(__name__)
+
 resultList = []
-resultCount = 0
+totalAmount = 0
+
 app.config.update(dict(
     # DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
@@ -59,12 +62,6 @@ def searchEmailsByName():
     print(results)
     return render_template("searchResultsByName.html", results = results)
 
-@app.route("/pos")
-def posTest():
-    print("test")
-
-    return render_template("POS.html")
-
 @app.route("/inventory")
 def inventory():
     return render_template("inventory.html", items = db.getItems())
@@ -72,7 +69,6 @@ def inventory():
 @app.route("/emailList")
 def emails():
     return render_template("emailList.html", items = db.getEmailsInSystem())
-
 
 @app.route("/login", methods=["GET","POST"])
 def signIn():
@@ -89,19 +85,23 @@ def secret():
 
 @app.route("/pos")
 def pos():
-    return render_template("POS.html",results = resultList, count = resultCount)
+    requireLogin()
+    return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"))
 
 @app.route("/cart", methods=["POST"])
 def cart():
+    requireLogin()
     itemNumber = [str(request.form["ItemNumber"])]
-    name = db.getById(int(itemNumber[0]))[0][0]
+    nameSearchResult = db.getById(int(itemNumber[0]))
+    if (nameSearchResult == []):
+        return redirect("/pos")
+    name = nameSearchResult[0][0]
     quantity = [int(request.form["quantity"])]
     price = db.getById(int(itemNumber[0]))[0][3] * quantity[0]
-    itemList = [itemNumber[0], name, quantity[0], price]
-    resultList.append(itemList)
-    totalAmount = getTotalPrice(resultList)
-    return render_template("POS.html", results = resultList,totalPrice = "$"+str(totalAmount))
-
+    itemList = [itemNumber[0], name, str(quantity[0]), str(price)]
+    session["resultList"] = session.get("resultList") + [itemList]
+    session["totalAmount"] = str(getTotalPrice(session.get("resultList")))
+    return redirect("/pos")
 
 @app.route("/checkout")
 def checkout():
@@ -110,7 +110,6 @@ def checkout():
 @app.route("/methodOfPayment")
 def payment():
     return "Stub implementation"
-
 
 if (__name__ == "__main__"):
     app.run()
