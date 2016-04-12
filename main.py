@@ -85,8 +85,13 @@ def cart():
     price = db.getById(int(itemNumber[0]))[0][3] * quantity[0]
     itemList = [itemNumber[0], name, quantity[0], price]
     resultList.append(itemList)
-    print(resultList)
-    return render_template("POS.html", results = resultList)
+    totalAmount = getTotalPrice(resultList)
+    return render_template("POS.html", results = resultList,totalPrice = "$"+str(totalAmount))
+
+
+@app.route("/checkout")
+def checkout():
+    return "This will be the checkout page"
 
 
 if (__name__ == "__main__"):

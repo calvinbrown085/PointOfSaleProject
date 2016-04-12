@@ -5,6 +5,14 @@ from random import randint
 db = Database()
 
 
+def getTotalPrice(cart):
+    print(cart)
+    totalPrice = 0
+    for x in cart:
+        totalPrice += x[3]
+    return totalPrice
+
+
 def moneyMadeFromProduct(productId):
     productBuyPrice = db.getById(productId)[0][2]
     productSellPrice = db.getById(productId)[0][3]
