@@ -87,7 +87,6 @@ def secret():
     requireLogin()
     return "Logged in!!"
 
-<<<<<<< HEAD
 @app.route("/pos")
 def pos():
     return render_template("POS.html",results = resultList, count = resultCount)
@@ -107,11 +106,10 @@ def cart():
 @app.route("/checkout")
 def checkout():
     return "This will be the checkout page"
-=======
+
 @app.route("/methodOfPayment")
 def payment():
     return "Stub implementation"
->>>>>>> 3990fb5b4019545cb240e28b830cdf7740ade689
 
 
 if (__name__ == "__main__"):
