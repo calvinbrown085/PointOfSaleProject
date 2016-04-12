@@ -6,7 +6,8 @@ from DatabaseUtils import *
 from OneOffInventoryLog import *
 db = Database()
 app = Flask(__name__)
-
+resultList = []
+resultCount = 0
 app.config.update(dict(
     # DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
@@ -85,6 +86,26 @@ def signOut():
 def secret():
     requireLogin()
     return "Logged in!!"
+
+@app.route("/pos")
+def pos():
+    return render_template("POS.html",results = resultList, count = resultCount)
+
+@app.route("/cart", methods=["POST"])
+def cart():
+    itemNumber = [str(request.form["ItemNumber"])]
+    name = db.getById(int(itemNumber[0]))[0][0]
+    quantity = [int(request.form["quantity"])]
+    price = db.getById(int(itemNumber[0]))[0][3] * quantity[0]
+    itemList = [itemNumber[0], name, quantity[0], price]
+    resultList.append(itemList)
+    totalAmount = getTotalPrice(resultList)
+    return render_template("POS.html", results = resultList,totalPrice = "$"+str(totalAmount))
+
+
+@app.route("/checkout")
+def checkout():
+    return "This will be the checkout page"
 
 @app.route("/methodOfPayment")
 def payment():
