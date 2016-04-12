@@ -6,7 +6,6 @@ db = Database()
 
 
 def getTotalPrice(cart):
-    print(cart)
     totalPrice = 0
     for x in cart:
         totalPrice += float(x[3])

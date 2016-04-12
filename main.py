@@ -12,7 +12,7 @@ resultList = []
 totalAmount = 0
 
 app.config.update(dict(
-    DEBUG=True,
+    # DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 @app.route("/")
 def singleSlash():
@@ -92,7 +92,10 @@ def pos():
 def cart():
     requireLogin()
     itemNumber = [str(request.form["ItemNumber"])]
-    name = db.getById(int(itemNumber[0]))[0][0]
+    nameSearchResult = db.getById(int(itemNumber[0]))
+    if (nameSearchResult == []):
+        return redirect("/pos")
+    name = nameSearchResult[0][0]
     quantity = [int(request.form["quantity"])]
     price = db.getById(int(itemNumber[0]))[0][3] * quantity[0]
     itemList = [itemNumber[0], name, str(quantity[0]), str(price)]
