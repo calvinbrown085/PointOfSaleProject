@@ -7,9 +7,9 @@ from OneOffInventoryLog import *
 db = Database()
 app = Flask(__name__)
 resultList = []
-resultCount = 0
+totalAmount = 0
 app.config.update(dict(
-    # DEBUG=True,
+    #DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 @app.route("/")
 def singleSlash():
@@ -59,12 +59,6 @@ def searchEmailsByName():
     print(results)
     return render_template("searchResultsByName.html", results = results)
 
-@app.route("/pos")
-def posTest():
-    print("test")
-
-    return render_template("POS.html")
-
 @app.route("/inventory")
 def inventory():
     return render_template("inventory.html", items = db.getItems())
@@ -89,7 +83,8 @@ def secret():
 
 @app.route("/pos")
 def pos():
-    return render_template("POS.html",results = resultList, count = resultCount)
+    totalAmount = getTotalPrice(resultList)
+    return render_template("POS.html", results = resultList,totalPrice = "$"+str(totalAmount))
 
 @app.route("/cart", methods=["POST"])
 def cart():
@@ -99,8 +94,7 @@ def cart():
     price = db.getById(int(itemNumber[0]))[0][3] * quantity[0]
     itemList = [itemNumber[0], name, quantity[0], price]
     resultList.append(itemList)
-    totalAmount = getTotalPrice(resultList)
-    return render_template("POS.html", results = resultList,totalPrice = "$"+str(totalAmount))
+    return redirect("/pos")
 
 
 @app.route("/checkout")
