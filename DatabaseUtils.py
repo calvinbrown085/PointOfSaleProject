@@ -1,9 +1,6 @@
 from Database import Database
 from random import randint
-
-
-db = Database()
-
+from main import db
 
 def getTotalPrice(cart):
     totalPrice = 0
