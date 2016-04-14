@@ -18,6 +18,26 @@ loginHtml = """<!DOCTYPE html>
   </body>
 </html>"""
 
+loginErrorHtml =  """<!DOCTYPE html>
+<html>
+  <head>
+    <title>Log In</title>
+  </head>
+  <body>
+    <h2>Please Log In</h2>
+    <p> Incorrect Username or Password.
+    Please check your credentials and try again.
+    </p>
+    <form action="/login", method="post">
+      username: <br>
+      <input type="text" name="username"></input>
+      password: <br>
+      <input type="password" name="password"></input>
+      <input type="submit" name="login">
+    </form>
+  </body>
+</html>"""
+
 logoutHtml = """<!DOCTYPE html>
 <html>
   <head>
@@ -30,6 +50,7 @@ logoutHtml = """<!DOCTYPE html>
 </html>"""
 
 def requireLogin():
+    print(not session.get("logged_in"))
     if (not session.get("logged_in")):
         return abort(401)
 
@@ -45,7 +66,7 @@ def login(db):
         if (request.method == "POST"):
             passwordHash = db.getPasswordForUser(request.form["username"])
             if (passwordHash == []):
-                return abort(401)
+                return loginErrorHtml
             else:
                 if (pwd_context.verify(request.form["password"], passwordHash[0][0])):
                     session['logged_in'] = True
@@ -57,6 +78,6 @@ def login(db):
                     else:
                         return redirect("/pos")
                 else:
-                    return abort(401)
+                    return loginErrorHtml
         else:
             return loginHtml

@@ -14,6 +14,7 @@ totalAmount = 0
 app.config.update(dict(
     DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
+
 @app.route("/")
 def singleSlash():
     if (not session.get("logged_in")):
@@ -29,7 +30,6 @@ def index():
 def form():
     email = request.form["email"]
     db.storeEmail(email)
-
     return redirect("/")
 
 @app.route("/writeEmail", methods=["POST"])
@@ -43,7 +43,6 @@ def writeTransaction():
 @app.route("/writeNewInventoryItem", methods=["POST"])
 def writeNewInventoryItem():
     return "This is a stub to be filled in later"
-
 
 @app.route("/searchInventoryById", methods=["POST"])
 def searchById():
@@ -80,6 +79,7 @@ def signOut():
 @app.route("/secret")
 def secret():
     requireLogin()
+    print(session.get("logged_in"))
     return "Logged in!!"
 
 @app.route("/pos")
