@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Index</title>
+  </head>
+  <body>
+    <table border="4" style="width:50%">
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+      </tr>
+      {% for res in results %}
+        <tr>
+          <td>{{res[0]}}</td>
+          <td>{{res[1]}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+    <a href="/">back</a>
+  </body>
+</html>

@@ -35,6 +35,7 @@ def form():
 @app.route("/writeEmail", methods=["POST"])
 def writeEmail():
     newCustomer(str(request.form["customer_name"]),str(request.form["customer_email"]))
+    return redirect("/")
 
 @app.route("/writeTransaction", methods=["POST"])
 def writeTransaction():
@@ -57,8 +58,7 @@ def searchByName():
 @app.route("/searchEmailsByName", methods=["POST"])
 def searchEmailsByName():
     results = db.getUser(str(request.form["emailNameSearch"]))
-    results = results[0]
-    return render_template("searchResultsByName.html", results = results)
+    return render_template("emailSearchResults.html", results = results)
 
 @app.route("/inventory")
 def inventory():
