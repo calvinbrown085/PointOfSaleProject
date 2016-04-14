@@ -5,8 +5,39 @@
   </head>
   <body>
     <table border="4" style="width:50%">
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Product Id
+        </th>
+        <th>
+          Purchase Price
+        </th>
+        <th>
+          Selling Price
+        </th>
+        <th>
+          Seller
+        </th>
+        <th>
+          Product Type
+        </th>
+        <th>
+          Amount In Stock
+        </th>
+      </tr>
       {% for res in results %}
-        <tr><td>{{res}}</td></tr>
+        <tr>
+          <td>{{res[0]}}</td>
+          <td>{{res[1]}}</td>
+          <td>{{res[2]}}</td>
+          <td>{{res[3]}}</td>
+          <td>{{res[4]}}</td>
+          <td>{{res[5]}}</td>
+          <td>{{res[6]}}</td>
+        </tr>
       {% endfor %}
     </table>
     <a href="/">back</a>

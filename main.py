@@ -47,19 +47,18 @@ def writeNewInventoryItem():
 
 @app.route("/searchInventoryById", methods=["POST"])
 def searchById():
-    results = [db.getById(str(request.form["idSearch"]))]
+    results = db.getById(str(request.form["idSearch"]))
     return render_template("searchResults.html", results = results)
 
 @app.route("/searchInventoryByName", methods=["POST"])
 def searchByName():
-    results = [db.getByName(str(request.form["nameSearch"]))]
-    return render_template("searchResultsByName.html", results = results)
+    results = db.getByName(str(request.form["nameSearch"]))
+    return render_template("searchResults.html", results = results)
 
 @app.route("/searchEmailsByName", methods=["POST"])
 def searchEmailsByName():
-    results = [db.getUser(str(request.form["emailNameSearch"]))]
+    results = db.getUser(str(request.form["emailNameSearch"]))
     results = results[0]
-    print(results)
     return render_template("searchResultsByName.html", results = results)
 
 @app.route("/inventory")
