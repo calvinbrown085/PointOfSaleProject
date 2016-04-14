@@ -50,7 +50,6 @@ logoutHtml = """<!DOCTYPE html>
 </html>"""
 
 def requireLogin():
-    print(not session.get("logged_in"))
     if (not session.get("logged_in")):
         return abort(401)
 

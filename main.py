@@ -125,5 +125,10 @@ def checkout():
 def payment():
     return "Stub implementation"
 
+@app.route("/profitReport")
+def profitReport():
+    requireLogin()
+    return render_template("profitReport.html", report = generateReport())
+
 if (__name__ == "__main__"):
     app.run()
