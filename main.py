@@ -1,16 +1,15 @@
 from flask import Flask, render_template, request, redirect, session
 from Database import Database
-import sqlite3
 from UserLoginPackage import login,logout,requireLogin
 from DatabaseUtils import *
-from OneOffInventoryLog import *
+import os
 
 db = Database()
 app = Flask(__name__)
 
 app.config.update(dict(
-    DEBUG=True,
-    SECRET_KEY='A Very Very Secret Key'))
+    # DEBUG=True,
+    SECRET_KEY= os.environ["Key"]))
 
 @app.route("/")
 def singleSlash():
