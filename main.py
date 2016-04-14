@@ -66,7 +66,7 @@ def inventory():
 
 @app.route("/emailList")
 def emails():
-    return render_template("emailList.html", items = db.getEmailsInSystem())
+    return render_template("emailSearchResults.html", results = db.getEmailsInSystem())
 
 @app.route("/login", methods=["GET","POST"])
 def signIn():
