@@ -8,9 +8,6 @@ from OneOffInventoryLog import *
 db = Database()
 app = Flask(__name__)
 
-resultList = []
-totalAmount = 0
-
 app.config.update(dict(
     DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
@@ -86,21 +83,6 @@ def secret():
 def pos():
     requireLogin()
     return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"))
-
-# @app.route("/cart", methods=["POST"])
-# def cart():
-#     requireLogin()
-#     itemNumber = [str(request.form["ItemNumber"])]
-#     nameSearchResult = db.getById(int(itemNumber[0]))
-#     if (nameSearchResult == []):
-#         return redirect("/pos")
-#     name = nameSearchResult[0][0]
-#     quantity = [int(request.form["quantity"])]
-#     price = db.getById(int(itemNumber[0]))[0][3] * quantity[0]
-#     itemList = [itemNumber[0], name, str(quantity[0]), str(price)]
-#     session["resultList"] = session.get("resultList") + [itemList]
-#     session["totalAmount"] = str(getTotalPrice(session.get("resultList")))
-#     return redirect("/pos")
 
 @app.route("/cart", methods=["POST"])
 def cart():
