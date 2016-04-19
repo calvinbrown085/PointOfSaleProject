@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect, session
 from Database import Database
-import sqlite3
 from UserLoginPackage import login,logout,requireLogin
 from DatabaseUtils import *
-from OneOffInventoryLog import *
+import os
 
 db = Database()
 app = Flask(__name__)
@@ -15,6 +14,9 @@ products = []
 app.config.update(dict(
     #DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
+app.config.update(dict(
+    # DEBUG=True,
+    SECRET_KEY= os.environ["Key"]))
 @app.route("/")
 def singleSlash():
     if (not session.get("logged_in")):
@@ -30,12 +32,12 @@ def index():
 def form():
     email = request.form["email"]
     db.storeEmail(email)
-
     return redirect("/")
 
 @app.route("/writeEmail", methods=["POST"])
 def writeEmail():
     newCustomer(str(request.form["customer_name"]),str(request.form["customer_email"]))
+    return redirect("/")
 
 @app.route("/writeTransaction", methods=["POST"])
 def writeTransaction():
@@ -45,23 +47,20 @@ def writeTransaction():
 def writeNewInventoryItem():
     return "This is a stub to be filled in later"
 
-
 @app.route("/searchInventoryById", methods=["POST"])
 def searchById():
-    results = [db.getById(str(request.form["idSearch"]))]
+    results = db.getById(str(request.form["idSearch"]))
     return render_template("searchResults.html", results = results)
 
 @app.route("/searchInventoryByName", methods=["POST"])
 def searchByName():
-    results = [db.getByName(str(request.form["nameSearch"]))]
-    return render_template("searchResultsByName.html", results = results)
+    results = db.getByName(str(request.form["nameSearch"]))
+    return render_template("searchResults.html", results = results)
 
 @app.route("/searchEmailsByName", methods=["POST"])
 def searchEmailsByName():
-    results = [db.getUser(str(request.form["emailNameSearch"]))]
-    results = results[0]
-    print(results)
-    return render_template("searchResultsByName.html", results = results)
+    results = db.getUser(str(request.form["emailNameSearch"]))
+    return render_template("emailSearchResults.html", results = results)
 
 @app.route("/inventory")
 def inventory():
@@ -69,7 +68,7 @@ def inventory():
 
 @app.route("/emailList")
 def emails():
-    return render_template("emailList.html", items = db.getEmailsInSystem())
+    return render_template("emailSearchResults.html", results = db.getEmailsInSystem())
 
 @app.route("/login", methods=["GET","POST"])
 def signIn():
@@ -82,6 +81,7 @@ def signOut():
 @app.route("/secret")
 def secret():
     requireLogin()
+    print(session.get("logged_in"))
     return "Logged in!!"
 
 @app.route("/pos")
@@ -92,14 +92,14 @@ def pos():
 @app.route("/cart", methods=["POST"])
 def cart():
     requireLogin()
-    itemNumber = [str(request.form["ItemNumber"])]
-    nameSearchResult = db.getById(int(itemNumber[0]))
-    if (nameSearchResult == []):
+    itemNumber = request.form["ItemNumber"]
+    searchResult = db.getById(int(itemNumber))
+    if (searchResult == [] or request.form["quantity"] == ""):
         return redirect("/pos")
-    name = nameSearchResult[0][0]
-    quantity = [int(request.form["quantity"])]
-    price = db.getById(int(itemNumber[0]))[0][3] * quantity[0]
-    itemList = [itemNumber[0], name, str(quantity[0]), str(price)]
+    name = searchResult[0][0]
+    quantity = request.form["quantity"]
+    price = searchResult[0][3] * int(quantity)
+    itemList = [itemNumber, name, quantity, str(price)]
     session["resultList"] = session.get("resultList") + [itemList]
     session["totalAmount"] = str(getTotalPrice(session.get("resultList")))
     return redirect("/pos")
@@ -111,7 +111,6 @@ def checkout():
 @app.route("/methodOfPayment")
 def payment():
     return "Stub implementation"
-
 
 @app.route("/search")
 def search():
@@ -132,6 +131,10 @@ def search():
         session["searchList"] = session.get("searchList") + addToSearchQuery(query)
 
     return redirect("/pos")
+@app.route("/profitReport")
+def profitReport():
+    requireLogin()
+    return render_template("profitReport.html", report = generateReport())
 
 if (__name__ == "__main__"):
     app.run()
