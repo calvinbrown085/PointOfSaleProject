@@ -45,3 +45,9 @@ def generateReport():
 
 def purchasedItems(productId,howManyPurchased):
     db.updateInventoryLog(productId,howManyPurchased)
+
+def addToSearchQuery(searchList):
+    emptyList = []
+    for tup in searchList:
+        emptyList.append([tup[1],tup[0],tup[4],str(tup[3])])
+    return emptyList
