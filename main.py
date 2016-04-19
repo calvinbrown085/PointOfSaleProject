@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 app.config.update(dict(
     DEBUG=True,
-    SECRET_KEY= "Key"))
+    SECRET_KEY= os.environ["Key"]))
 
 @app.route("/")
 def singleSlash():
