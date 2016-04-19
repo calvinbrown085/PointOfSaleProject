@@ -52,6 +52,7 @@ def login(db):
                     session["current_user"] = request.form["username"]
                     session["resultList"] = []
                     session["totalAmount"] = 0
+                    session["searchList"] = []
                     if (db.getManagerStatus()[0][0] == 1):
                         return redirect("/pos") #This will need to be changed to point to the manager page.
                     else:

@@ -145,18 +145,16 @@
 		<table id="resultTable" border='0'>
 			<tr style="font-size:13px">
 				{% for thing in searchResults %}
-					{% for something in thing %}
 				<tr>
 					<td><div id="ID">
-					</div>{{something[1]}}</td>
+					</div>{{thing[0]}}</td>
 					<td><div id="PN">
-					</div>{{something[0]}}</td>
+					</div>{{thing[1]}}</td>
 					<td><div id="Sup">
-					</div>{{something[4]}}</td>
+					</div>{{thing[2]}}</td>
 					<td><div id="Price">
-					</div>{{something[3]}}</td>
+					</div>{{thing[3]}}</td>
 				</tr>
-					{% endfor %}
 				{% endfor %}
 			</tr>
 
@@ -216,7 +214,7 @@
  	</form>
 	<div align = "left">
 		<br>
-		Total Amount:
+		Total Amount: $
 		{{totalPrice}}
 	</div>
 
