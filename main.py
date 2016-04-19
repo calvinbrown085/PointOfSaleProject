@@ -8,6 +8,7 @@ db = Database()
 app = Flask(__name__)
 resultList = []
 totalAmount = 0
+products = []
 app.config.update(dict(
     #DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
@@ -84,7 +85,7 @@ def secret():
 @app.route("/pos")
 def pos():
     totalAmount = getTotalPrice(resultList)
-    return render_template("POS.html", results = resultList,totalPrice = "$"+str(totalAmount))
+    return render_template("POS.html", results = resultList,totalPrice = "$"+str(totalAmount), searchResults = products)
 
 @app.route("/cart", methods=["POST"])
 def cart():
@@ -104,6 +105,21 @@ def checkout():
 @app.route("/methodOfPayment")
 def payment():
     return "Stub implementation"
+
+@app.route("/search")
+def search():
+    userInput = request.args.get('ItemNumber')
+    searchBy = request.args.get('items')
+    if searchBy == "price":
+        products.append(db.getItemsByPrice(str(userInput)))
+    elif searchBy == "id":
+        products.append(db.getById(str(userInput)))
+    elif searchBy == "name":
+        products.append(db.getByName(str(userInput)))
+    elif searchBy == "supply":
+        products.append(db.getBySupplier(str(userInput)))
+
+    return redirect("/pos")
 
 
 if (__name__ == "__main__"):
