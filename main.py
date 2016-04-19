@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 app.config.update(dict(
     # DEBUG=True,
-    SECRET_KEY= os.environ["Key"]))
+    SECRET_KEY= "SECRET_KEY"))
 
 @app.route("/")
 def singleSlash():
@@ -58,6 +58,7 @@ def searchEmailsByName():
 
 @app.route("/inventory")
 def inventory():
+    requireLogin()
     return render_template("inventory.html", items = db.getItems())
 
 @app.route("/emailList")
