@@ -22,6 +22,10 @@ def singleSlash():
 def index():
     return render_template("index.html")
 
+@app.route("/managerPage")
+def managerPage():
+    return render_template("Managerpage.html")
+
 @app.route("/form", methods=["POST"])
 def form():
     email = request.form["email"]
@@ -111,5 +115,15 @@ def profitReport():
     requireLogin()
     return render_template("profitReport.html", report = generateReport())
 
+@app.route("/managerSearch")
+def managerSearch():
+    searchType = request.args.get('ProductID')
+    userInput = request.args.get('text')
+    if(searchType == "Name"):
+        query = db.getItemsByPrice(str(userInput))
+        session["mangerSearchList"] = session.get("mangerSearchList") + addToSearchQuery(query)
+    elif(searchType == "ProductID")
+        query = db.getItemsByPrice(str(userInput))
+        session["mangerSearchList"] = session.get("mangerSearchList") + addToSearchQuery(query)
 if (__name__ == "__main__"):
     app.run()
