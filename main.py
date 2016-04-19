@@ -13,7 +13,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    # DEBUG=True,
+    #DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 @app.route("/")
 def singleSlash():
@@ -87,7 +87,7 @@ def secret():
 @app.route("/pos")
 def pos():
     requireLogin()
-    return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"))
+    return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"), searchResults = session.get("searchList"))
 
 @app.route("/cart", methods=["POST"])
 def cart():
@@ -117,14 +117,19 @@ def payment():
 def search():
     userInput = request.args.get('ItemNumber')
     searchBy = request.args.get('items')
+    session["searchList"] = []
     if searchBy == "price":
-        products.append(db.getItemsByPrice(str(userInput)))
+        query = db.getItemsByPrice(str(userInput))
+        session["searchList"] = session.get("searchList") + addToSearchQuery(query)
     elif searchBy == "id":
-        products.append(db.getById(str(userInput)))
+        query = db.getById(str(userInput))
+        session["searchList"] = session.get("searchList") + addToSearchQuery(query)
     elif searchBy == "name":
-        products.append(db.getByName(str(userInput)))
+        query = db.getByName(str(userInput))
+        session["searchList"] = session.get("searchList") + addToSearchQuery(query)
     elif searchBy == "supply":
-        products.append(db.getBySupplier(str(userInput)))
+        query = db.getBySupplier(str(userInput))
+        session["searchList"] = session.get("searchList") + addToSearchQuery(query)
 
     return redirect("/pos")
 
