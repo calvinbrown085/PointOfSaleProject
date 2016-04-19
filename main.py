@@ -7,10 +7,16 @@ import os
 db = Database()
 app = Flask(__name__)
 
+resultList = []
+totalAmount = 0
+products = []
+
+app.config.update(dict(
+    #DEBUG=True,
+    SECRET_KEY='A Very Very Secret Key'))
 app.config.update(dict(
     # DEBUG=True,
     SECRET_KEY= os.environ["Key"]))
-
 @app.route("/")
 def singleSlash():
     if (not session.get("logged_in")):
@@ -81,7 +87,7 @@ def secret():
 @app.route("/pos")
 def pos():
     requireLogin()
-    return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"))
+    return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"), searchResults = session.get("searchList"))
 
 @app.route("/cart", methods=["POST"])
 def cart():
@@ -106,6 +112,25 @@ def checkout():
 def payment():
     return "Stub implementation"
 
+@app.route("/search")
+def search():
+    userInput = request.args.get('ItemNumber')
+    searchBy = request.args.get('items')
+    session["searchList"] = []
+    if (searchBy == "price"):
+        query = db.getItemsByPrice(str(userInput))
+        session["searchList"] = session.get("searchList") + addToSearchQuery(query)
+    elif (searchBy == "id"):
+        query = db.getById(str(userInput))
+        session["searchList"] = session.get("searchList") + addToSearchQuery(query)
+    elif (searchBy == "name"):
+        query = db.getByName(str(userInput))
+        session["searchList"] = session.get("searchList") + addToSearchQuery(query)
+    elif (searchBy == "supply"):
+        query = db.getBySupplier(str(userInput))
+        session["searchList"] = session.get("searchList") + addToSearchQuery(query)
+
+    return redirect("/pos")
 @app.route("/profitReport")
 def profitReport():
     requireLogin()
