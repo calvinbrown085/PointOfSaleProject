@@ -51,7 +51,6 @@
 <td>
 <center>
 <table border="1" align="center"><tr>
-<td>ID Name</td>
 <td>Name</td>
 <td>Product Id</td>
 <td>Purchase Price</td>
@@ -60,7 +59,8 @@
 <td> Product Type</td>
 <td>Amount In Stock</td></tr>
 {% for item in items %}
-<tr><td>{{item[0]}}</td>
+<tr>
+<td>{{item[0]}}</td>
 <td>{{item[1]}}</td>
 <td>{{item[2]}}</td>
 <td>{{item[3]}}</td>

@@ -12,7 +12,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    #DEBUG=True,
+    DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 app.config.update(dict(
     # DEBUG=True,
@@ -30,7 +30,7 @@ def index():
 
 @app.route("/managerPage")
 def managerPage():
-    return render_template("Managerpage.html")
+    return render_template("Managerpage.html", items = session.get("managerSearchList"))
 
 @app.route("/form", methods=["POST"])
 def form():
@@ -144,11 +144,13 @@ def profitReport():
 def managerSearch():
     searchType = request.args.get('ProductID')
     userInput = request.args.get('text')
+    session["managerSearchList"] = []
     if(searchType == "Name"):
-        query = db.getItemsByPrice(str(userInput))
-        session["mangerSearchList"] = session.get("mangerSearchList") + addToSearchQuery(query)
-    elif(searchType == "ProductID")
-        query = db.getItemsByPrice(str(userInput))
-        session["mangerSearchList"] = session.get("mangerSearchList") + addToSearchQuery(query)
+        query = db.getByName(str(userInput))
+        session["managerSearchList"] = session.get("managerSearchList") + addToManagerSearchQuery(query)
+    elif(searchType == "ProductID"):
+        query = db.getById(str(userInput))
+        session["managerSearchList"] = session.get("managerSearchList") + addToManageSearchQuery(query)
+    return redirect("/managerPage")
 if (__name__ == "__main__"):
     app.run()
