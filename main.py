@@ -117,16 +117,16 @@ def search():
     userInput = request.args.get('ItemNumber')
     searchBy = request.args.get('items')
     session["searchList"] = []
-    if searchBy == "price":
+    if (searchBy == "price"):
         query = db.getItemsByPrice(str(userInput))
         session["searchList"] = session.get("searchList") + addToSearchQuery(query)
-    elif searchBy == "id":
+    elif (searchBy == "id"):
         query = db.getById(str(userInput))
         session["searchList"] = session.get("searchList") + addToSearchQuery(query)
-    elif searchBy == "name":
+    elif (searchBy == "name"):
         query = db.getByName(str(userInput))
         session["searchList"] = session.get("searchList") + addToSearchQuery(query)
-    elif searchBy == "supply":
+    elif (searchBy == "supply"):
         query = db.getBySupplier(str(userInput))
         session["searchList"] = session.get("searchList") + addToSearchQuery(query)
 
