@@ -20,6 +20,13 @@ class Database():
         productNameLike = str(productName+"%")
         return self.db.readQuery("""select * from inventory where name LIKE '{}'""".format(productNameLike))
 
+    def getBySupplier(self,supplierName):
+        supplierNameLike = str(supplierName+"%")
+        return self.db.readQuery("""select * from inventory where supplier LIKE '{}'""".format(supplierNameLike))
+
+    def getItemsByPrice(self, price):
+        return self.db.readQuery("""select * from inventory where selling_price = '{}'""".format(price))
+
     def getItems(self):
         return self.db.readQuery("""select * from inventory""")
 

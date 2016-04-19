@@ -1,6 +1,6 @@
 <!DOCTYPE html>
  <html>
-
+ 
  <head>
  	<title>
  		POS System
@@ -99,11 +99,11 @@
 
 
  <body>
-
+ 
  <div id="header">
  	<h1> Bob's Grocery</h1>
  </div>
-
+ 
 
 
 <div id="nav">
@@ -130,7 +130,7 @@
 
 		<input type="submit" value="Search">
 	</form><br><br>
-
+		
 	<div style="height:450px;width:332px;border:1px solid #ccc;overflow:auto;">
 
 		<table id="headerTable" border='1'>
@@ -144,17 +144,16 @@
 
 		<table id="resultTable" border='0'>
 			<tr style="font-size:13px">
-				{% for thing in searchResults %}
-				<tr>
-					<td><div id="ID">
-					</div>{{thing[0]}}</td>
-					<td><div id="PN">
-					</div>{{thing[1]}}</td>
-					<td><div id="Sup">
-					</div>{{thing[2]}}</td>
-					<td><div id="Price">
-					</div>{{thing[3]}}</td>
-				</tr>
+				{% for thing in results %}
+				<td><div id="ID">
+						</div>{{thing[0]}}</td>
+				<td><div id="PN">
+						</div>{{thing[1]}}</td>
+				<td><div id="Sup">
+						</div>{{thing[2]}}</td>
+				<td><div id="Price">
+						</div>{{thing[3]}}</td>
+
 				{% endfor %}
 			</tr>
 
@@ -162,14 +161,14 @@
 	</div>
 </div>
 
-
+ 
  <div id="other">
+ 
+ 
 
-
-
-
+ 
  	<div style="height:400px;width:360px;border:1px solid #ccc;overflow:auto;">
-
+ 
  		<table border="1">
  			<tr>
  				<th>Product ID</th>
@@ -178,31 +177,31 @@
  				<th>Price</th>
  			</tr>
  		</table>
-
-
+ 
+ 
  		<table border="0">
  			<tr style="font-size:13px">
  				{% for some in results %}
-				<tr>
+
  					<td><div id="IN" align:'left'>
  						</div> {{some[0]}}</td>
  					<td><div id="I">
  					</div> {{some[1]}} </td>
-
+ 
  					<td><div id='Q'>
  						<div> {{some[2]}} </div>
  					</div></td>
  					<td><div id="P">
  						<div> {{some[3]}} </div>
  					</div></td>
-				</tr>
+ 
  				{% endfor %}
  			</tr>
  		</table>
-
+ 
  	</div>
-
-
+ 
+ 
  	<div align="right">
  	<br>
  	<form action = "/cart" method = "post">
@@ -212,19 +211,14 @@
    		<input type="text" name="quantity"><br></input>
    		<input type="submit" value="Add">
  	</form>
-	<div align = "left">
-		<br>
-		Total Amount: $
-		{{totalPrice}}
-	</div>
-
+ 
  	<br>
  	<br>
-
- 	<button type="button">Check Out</button><br>
+ 
+ 	<a href="/checkout.html"><button type="button">Check Out</button></a><br>
  	</div>
-
-
+ 
+ 
  </div>
  </body>
  </html>
