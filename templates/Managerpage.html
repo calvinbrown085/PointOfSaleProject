@@ -12,7 +12,14 @@
 <form action="/managerSearch" method="post">
 <center><b>Generate Product orders</b></center>
 <p>
-<center><textarea name="textbox" rows="22" cols="50"> </textarea></center>
+<right><textarea name="textbox" rows="22" cols="50">
+{% for some in results %}
+<tr>
+  <td><div id="IN" align:'left'>
+    </div> {{some[0]}}</td>
+</tr>
+{% endfor %}
+</textarea></right>
 <center><input type="submit" name="productsearch" value="Order Products"><center>
 </form>
 
@@ -35,7 +42,7 @@
 <table>
 <tr>
 <td>
-
+<p> Update Product Information - Please enter any Product Id and any info you want updated</p>
 <p>Product ID <input type="text" name="ID Name">
 <p>Name <input type="text" name="Name">
 <p>Product Id <input type="text" name="Product Id">
@@ -81,16 +88,17 @@
 <p>
 
 </form>
-<form action="Managerpage.html" method="post">
+<form action="/createSale">
 <center>
 <table>
 <tr>
 <td>
 <center>
-<p>Name <input type="text" name="Name">
-<p>Selling Price <input type="text" name="Selling Price">
-<p><input type="button" name="sale" value="Create Sale"><p>
+<p>Product Id <input type="text" name="productId">
+<p>New Selling Price <input type="text" name="newPrice">
+<p><input type="submit" name="sale" value="Create Sale"><p>
 </td>
+</form>
 <td>
 <table border="1" align="center">
 <tr>

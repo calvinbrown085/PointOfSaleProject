@@ -30,7 +30,7 @@ def index():
 
 @app.route("/managerPage")
 def managerPage():
-    return render_template("Managerpage.html", items = session.get("managerSearchList"))
+    return render_template("Managerpage.html", items = session.get("managerSearchList"),results = db.getItemsWithLowInventory())
 
 @app.route("/form", methods=["POST"])
 def form():
@@ -151,6 +151,14 @@ def managerSearch():
     elif(searchType == "ProductID"):
         query = db.getById(str(userInput))
         session["managerSearchList"] = session.get("managerSearchList") + addToManageSearchQuery(query)
+    return redirect("/managerPage")
+
+
+@app.route("/createSale")
+def createManagerSale():
+    productId = request.args.get('productId')
+    newSalePrice = request.args.get('newPrice')
+    createSale(productId, newSalePrice)
     return redirect("/managerPage")
 if (__name__ == "__main__"):
     app.run()
