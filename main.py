@@ -12,7 +12,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    #DEBUG=True,
+    DEBUG=True,
     SECRET_KEY='A Very Very Secret Key'))
 app.config.update(dict(
     # DEBUG=True,
@@ -27,6 +27,10 @@ def singleSlash():
 @app.route("/index")
 def index():
     return render_template("index.html")
+
+@app.route("/managerPage")
+def managerPage():
+    return render_template("Managerpage.html", items = session.get("managerSearchList"),results = db.getItemsWithLowInventory())
 
 @app.route("/form", methods=["POST"])
 def form():
@@ -136,5 +140,25 @@ def profitReport():
     requireLogin()
     return render_template("profitReport.html", report = generateReport())
 
+@app.route("/managerSearch")
+def managerSearch():
+    searchType = request.args.get('ProductID')
+    userInput = request.args.get('text')
+    session["managerSearchList"] = []
+    if(searchType == "Name"):
+        query = db.getByName(str(userInput))
+        session["managerSearchList"] = session.get("managerSearchList") + addToManagerSearchQuery(query)
+    elif(searchType == "ProductID"):
+        query = db.getById(str(userInput))
+        session["managerSearchList"] = session.get("managerSearchList") + addToManageSearchQuery(query)
+    return redirect("/managerPage")
+
+
+@app.route("/createSale")
+def createManagerSale():
+    productId = request.args.get('productId')
+    newSalePrice = request.args.get('newPrice')
+    createSale(productId, newSalePrice)
+    return redirect("/managerPage")
 if (__name__ == "__main__"):
     app.run()

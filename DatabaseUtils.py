@@ -51,3 +51,10 @@ def addToSearchQuery(searchList):
     for tup in searchList:
         emptyList.append([tup[1],tup[0],tup[4],str(tup[3])])
     return emptyList
+
+def addToManagerSearchQuery(searchList):
+    emptyList = []
+    for tup in searchList:
+        emptyList.append([tup[0],tup[1],str(tup[2]),str(tup[3]),tup[4],tup[5],tup[6]])
+    print(emptyList)
+    return emptyList
