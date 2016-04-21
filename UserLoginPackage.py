@@ -10,7 +10,7 @@ loginHtml = """<!DOCTYPE html>
     <h2>Please Log In</h2>
     <form action="/login", method="post">
       username: <br>
-      <input type="text" name="username"></input>
+      <input type="text" name="username"></input> <br>
       password: <br>
       <input type="password" name="password"></input>
       <input type="submit" name="login">
@@ -30,7 +30,7 @@ loginErrorHtml =  """<!DOCTYPE html>
     </p>
     <form action="/login", method="post">
       username: <br>
-      <input type="text" name="username"></input>
+      <input type="text" name="username"></input> <br>
       password: <br>
       <input type="password" name="password"></input>
       <input type="submit" name="login">
