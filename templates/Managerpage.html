@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="POS.css">
+<head>
+<title>Manager page!</title>
+<h1><center>Bobs Grocery</center></h1>
+</head>
+<body>
+
+
+<div class="navigation">
+<form action="/managerSearch" method="post">
+<center><b>Generate Product orders</b></center>
+<p>
+<right><textarea name="textbox" rows="22" cols="50">
+{% for some in results %}
+<tr>
+  <td><div id="IN" align:'left'>
+    </div> {{some[0]}}</td>
+</tr>
+{% endfor %}
+</textarea></right>
+<center><input type="submit" name="productsearch" value="Order Products"><center>
+</form>
+
+</div>
+<table>
+<tr>
+<td>
+<form action="/managerSearch">Search By: <select name="ProductID">
+<option value="Name"> Name </option>
+<option value="ProductID">Product ID</option>
+</select>
+</td>
+<td><input type="text" name="text"></td><td><input type="submit" name="Search"></td></tr>
+</table>
+</form>
+
+<div class="content">
+<form action="Managerpage.html" method="post">
+
+<table>
+<tr>
+<td>
+<p> Update Product Information - Please enter any Product Id and any info you want updated</p>
+<p>Product ID <input type="text" name="ID Name">
+<p>Name <input type="text" name="Name">
+<p>Product Id <input type="text" name="Product Id">
+<p>Purchase Price <input type="text" name="Purchase Price">
+<p>Selling Price <input type="text" name="Selling Price">
+<p>Seller <input type="text" name="Seller">
+<p>Product Type <input type="text" name="Product Type">
+<p>Amount In Stock <input type="text" name="Amount in Stock"></td>
+</tr>
+</table>
+<p><input type="submit" name="Update" value="Update">
+<tr>
+<td>
+<center>
+<table border="1" align="center"><tr>
+<td>Name</td>
+<td>Product Id</td>
+<td>Purchase Price</td>
+<td>Selling Price</td>
+<td>Seller</td>
+<td> Product Type</td>
+<td>Amount In Stock</td></tr>
+{% for item in items %}
+<tr>
+<td>{{item[0]}}</td>
+<td>{{item[1]}}</td>
+<td>{{item[2]}}</td>
+<td>{{item[3]}}</td>
+<td>{{item[4]}}</td>
+<td>{{item[5]}}</td>
+<td>{{item[6]}}</td>
+<td>{{item[7]}}</td>
+</tr>
+{% endfor %}
+</td>
+</tr>
+</table>
+</center>
+
+
+<p>
+<p>
+<p>
+
+</form>
+<form action="/createSale">
+<center>
+<table>
+<tr>
+<td>
+<center>
+<p>Product Id <input type="text" name="productId">
+<p>New Selling Price <input type="text" name="newPrice">
+<p><input type="submit" name="sale" value="Create Sale"><p>
+</td>
+</form>
+<td>
+<table border="1" align="center">
+<tr>
+<th colspan="3"><center>Weekly Profit report</center></th>
+</tr>
+<tr>
+<td>//</td>
+<td>//</td>
+<td>//</td>
+</tr>
+{% for item in items %}
+<tr>
+<td>{{item[1]}}</td>
+<td>{{item[2]}}</td>
+<td>{{item[3]}}</td>
+</tr>
+{% endfor %}
+</table>
+</center>
+</td>
+</tr>
+</table>
+</center>
+</form>
+</div>
+</body>
+</html>
