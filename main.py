@@ -12,11 +12,9 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    DEBUG=True,
-    SECRET_KEY='A Very Very Secret Key'))
-app.config.update(dict(
-    DEBUG=True,
+    # DEBUG=True,
     SECRET_KEY= os.environ["Key"]))
+
 @app.route("/")
 def singleSlash():
     if (not session.get("logged_in")):
@@ -68,6 +66,7 @@ def searchEmailsByName():
 
 @app.route("/inventory")
 def inventory():
+    requireLogin()
     return render_template("inventory.html", items = db.getItems())
 
 @app.route("/emailList")
