@@ -10,7 +10,7 @@ loginHtml = """<!DOCTYPE html>
     <h2>Please Log In</h2>
     <form action="/login", method="post">
       username: <br>
-      <input type="text" name="username"></input>
+      <input type="text" name="username"></input> <br>
       password: <br>
       <input type="password" name="password"></input>
       <input type="submit" name="login">
@@ -30,7 +30,7 @@ loginErrorHtml =  """<!DOCTYPE html>
     </p>
     <form action="/login", method="post">
       username: <br>
-      <input type="text" name="username"></input>
+      <input type="text" name="username"></input> <br>
       password: <br>
       <input type="password" name="password"></input>
       <input type="submit" name="login">
@@ -51,6 +51,10 @@ logoutHtml = """<!DOCTYPE html>
 
 def requireLogin():
     if (not session.get("logged_in")):
+        return abort(401)
+
+def requireManagerLogin(db):
+    if (session.get("logged_in") and db.getManagerStatus()[0][0] == 0):
         return abort(401)
 
 def logout():

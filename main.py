@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 from Database import Database
-from UserLoginPackage import login,logout,requireLogin
+from UserLoginPackage import *
 from DatabaseUtils import *
 import os
 
@@ -86,6 +86,12 @@ def secret():
     requireLogin()
     print(session.get("logged_in"))
     return "Logged in!!"
+
+@app.route("/superSecret")
+def superSecret():
+    requireManagerLogin(db)
+    print(session.get("logged_in"))
+    return "Manager Logged in!!"
 
 @app.route("/pos")
 def pos():
