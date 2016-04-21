@@ -53,6 +53,10 @@ def requireLogin():
     if (not session.get("logged_in")):
         return abort(401)
 
+def requireManagerLogin(db):
+    if (session.get("logged_in") and db.getManagerStatus()[0][0] == 0):
+        return abort(401)
+
 def logout():
     if (not session["logged_in"]):
         return redirect("/")
