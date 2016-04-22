@@ -133,6 +133,10 @@ def payment():
         itemList.append(item[1])
     newString = listToString(itemList)[2:]
     newTransaction(paymentMethod,session.get("totalAmount"),newString)
+    for item in session.get("resultList"):
+        db.sellItem(item[0],item[2])
+        db.updateInventoryLog(item[0],item[2])
+
     session["resultList"] = []
     session["totalAmount"] = 0.00
     session["searchList"] = []

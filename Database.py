@@ -76,15 +76,19 @@ class Database():
         self.db.writeQuery("""insert into transactions values ('{}','{}','{}','{}')""".format(transactionId, amountPaid, paymentType, itemsPurchased))
 
     """Update Queries"""
-    
+
     def updateInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):
         self.db.writeQuery("""update inventory set name ='{}', product_id = '{}',original_cost = '{}', selling_price = '{}',supplier = '{}',product_type = '{}',amount_in_stock = '{}','{}')""".format(name,productId, originalCost, sellPrice, supplier, productType, amountInStock))
 
     def updateInventoryLog(self, productId,howManyPurchased):
         inventoryLogGet = self.getFromInventoryLogByProductId(productId)
-        amountBought = inventoryLogGet[0][1] - howManyPurchased
-        amountSold =  inventoryLogGet[0][2] - howManyPurchased
-        self.db.writeQuery("""update inventory_log set products_recieved = '{}', products_sold = '{}' where product_id = '{}'""".format(amountBought, amountSold, productId))
+        amountSold =  inventoryLogGet[0][2] + int(howManyPurchased)
+        self.db.writeQuery("""update inventory_log set products_sold = '{}' where product_id = '{}'""".format(amountSold, productId))
 
     def createSale(self,productId, newPrice):
         self.db.writeQuery("""update inventory set selling_price = '{}' where product_id = '{}'""".format(newPrice, productId))
+
+    def sellItem(self,productId,howManyPurchased):
+        item = self.getById(productId)
+        howMany = item[0][6] - int(howManyPurchased)
+        self.db.writeQuery("""update inventory set amount_in_stock = '{}' where product_id = '{}'""".format(howMany, productId))
