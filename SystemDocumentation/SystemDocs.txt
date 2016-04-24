@@ -1,0 +1,32 @@
+This is the system documentation for our POS System. It will cover all the files in our system one by one and telling what they do.
+
+Database.py -
+Overview: This is the Database class that we use throughout the project that connects our code to the database, we are using heroku's database tools
+to connect this class to the DB
+
+Use Cases:
+We have our Get queries. These queries get information from the database, and don't write any information from the database. They are
+named exactly what they are supposed to do.
+
+We have our User queries, these queries interact with user data and can write and read information from the database.
+
+We have our Insert queries, these queries insert information into the database, it will write transaction, and put new information into
+the database.
+
+We have our Update queries, these queries don't insert any new rows into the database, but they will update existing rows in the
+database.
+
+
+
+DbConnection.py -
+Overview: This is the code that handles the returning and connecting to the URL of the database. This is a pretty simple interaction.
+This class is only used in the Database.py class, it allows for that class to connect to the database on Heroku.
+
+Use Cases:
+There are only 2 use cases for this class:
+
+readQuery, this function is used for the get queries in Database.py, it gives us information back from the database in python List form.
+
+writeQuery, this function doesn't return anything because it is used for insert and update queries in Database.py.
+
+These are only supposed to be used in Database.py class.
