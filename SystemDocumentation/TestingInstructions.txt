@@ -1,0 +1,9 @@
+This document will give information on how to access the groups code.
+
+To access and use the system please go to this url: https://cryptic-crag-17136.herokuapp.com
+
+You will be taken to http://cryptic-crag-17136.herokuapp.com/login
+
+Credentials for this are:
+Username:
+Password: <add these later>
