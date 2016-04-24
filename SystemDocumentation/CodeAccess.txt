@@ -57,4 +57,4 @@ OneOff.py
 OneOffInventoryLog.py
 - Pretty much the same as above, allowed us to write this instead of doing 50 separate queries.
 
-These don't really affect our code base that much but still worth mentioning. 
+These don't really affect our code base that much but still worth mentioning.
