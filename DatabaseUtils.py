@@ -13,7 +13,7 @@ def newCustomer(customerName, customerEmail):
     db.writeEmailToDatabase(customerName, customerEmail)
 
 def newTransaction(paymentMethod,paymentAmount,itemsPurchasedList):
-    db.insertNewTransaction(randint(0,1000000),paymentMethod,paymentAmount,listToString(itemsPurchasedList))
+    db.insertNewTransaction(randint(0,1000000),paymentMethod,paymentAmount,itemsPurchasedList)
 
 def listToString(itemsPurchasedList):
     newString = ""

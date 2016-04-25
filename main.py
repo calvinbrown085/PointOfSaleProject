@@ -12,7 +12,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    # DEBUG=True,
+    #DEBUG=True,
     SECRET_KEY= os.environ["Key"]))
 
 @app.route("/")
@@ -115,15 +115,38 @@ def cart():
 
 @app.route("/checkout")
 def checkout():
-    return "This will be the checkout page"
+    return render_template("checkout.html", results = session.get("resultList"), totalPrice = session.get("totalAmount"))
 
-@app.route("/methodOfPayment")
+@app.route("/payment")
 def payment():
-    return "Stub implementation"
+    cash = request.args.get('cashAmount')
+    cardNumber = request.args.get('cardNumber')
+    exp = request.args.get('exp')
+    cvv = request.args.get('CVV')
+    itemList = []
+    paymentMethod = ""
+    if(cash != None):
+        paymentMethod = "Cash"
+    elif(cardNumber != None):
+        paymentMethod = "Credit"
+    for item in session.get("resultList"):
+        itemList.append(item[1])
+    newString = listToString(itemList)[2:]
+    newTransaction(paymentMethod,session.get("totalAmount"),newString)
+    for item in session.get("resultList"):
+        db.sellItem(item[0],item[2])
+        db.updateInventoryLog(item[0],item[2])
+
+    session["resultList"] = []
+    session["totalAmount"] = 0.00
+    session["searchList"] = []
+    return redirect("/pos")
+
 
 @app.route("/search")
 def search():
     userInput = request.args.get('ItemNumber')
+    userInput = userInput.title()
     searchBy = request.args.get('items')
     session["searchList"] = []
     if (searchBy == "price"):
@@ -166,11 +189,11 @@ def createManagerSale():
     createSale(productId, newSalePrice)
     return redirect("/managerPage")
 
-
 @app.route("/cartClear")
 def clearCart():
     session["resultList"] = []
     session["totalAmount"] = 0.00
     return redirect("/pos")
+
 if (__name__ == "__main__"):
     app.run()
