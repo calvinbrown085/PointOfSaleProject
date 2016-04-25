@@ -165,5 +165,12 @@ def createManagerSale():
     newSalePrice = request.args.get('newPrice')
     createSale(productId, newSalePrice)
     return redirect("/managerPage")
+
+
+@app.route("/cartClear")
+def clearCart():
+    session["resultList"] = []
+    session["totalAmount"] = 0.00
+    return redirect("/pos")
 if (__name__ == "__main__"):
     app.run()
