@@ -12,6 +12,24 @@ Enter those credentials in the username and password in the correct fields.
 
 After you log in you will be taken to the http://cryptic-crag-17136.herokuapp.com/pos page.
 Overview of the POS page:
-On the left side of the screen you will see buttons that say "Manager Page" and "Log Out"
+On the left side of the screen you will see buttons that say "Manager Page", "Log Out" and "Inventory"
 
 Manager Page: This will take you to the manager page, if you have the right credentials (You will)
+
+Log Out: Does exactly what it says!
+
+Inventory: This will give you a rendered template of all the inventory items and info with them.
+
+Looking to the right a bit you will see an empty box, with a drop down menu, you can use this to search for something in the inventory.
+Try it out!
+use "Hot" for the top box, and select product name for the bottom box.
+"18	Hot Dogs	Oscar Meyer	2.00" should show up in the box below.
+
+The next box over, is the cart.
+The two boxes under that are product id and quantity like the labels suggest. If you try out,
+15 for the product id
+2 for the quantity
+"15	Cheese	2  4.30" should show up in the cart above! Feel free to add whatever else you want in the cart!
+Your total amount in the cart will show up in the Total Amount space.
+
+Click "Check Out" when you are done adding things to the cart. 
