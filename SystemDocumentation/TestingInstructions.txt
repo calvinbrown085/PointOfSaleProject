@@ -1,4 +1,4 @@
-This document will give information on how to access the groups code.
+These are instructions for using the Point Of Sale System.
 
 To access and use the system please go to this url: https://cryptic-crag-17136.herokuapp.com
 
@@ -32,4 +32,13 @@ The two boxes under that are product id and quantity like the labels suggest. If
 "15	Cheese	2  4.30" should show up in the cart above! Feel free to add whatever else you want in the cart!
 Your total amount in the cart will show up in the Total Amount space.
 
-Click "Check Out" when you are done adding things to the cart. 
+Click "Check Out" when you are done adding things to the cart.
+
+This will take you to a new page. On this page you will see a few things.
+On the left hand side of the screen you should see everything that was in your cart in that list.
+
+On the right side you should see 2 ways to pay. Choose one!
+
+Enter you amount either on the credit card or with cash. <checkout button>?
+
+After you check out you will be taken back to the pos page, where you can start again with a new customer.
