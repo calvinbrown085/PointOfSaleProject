@@ -33,7 +33,10 @@ writeQuery, this function doesn't return anything because it is used for insert 
 
 These are only supposed to be used in Database.py class.
 
-main.py
+
+DatabaseUtils.py -
+
+main.py - 
 Overview: This is the brain of our program. It handles all the internet requests, and handles all of the routes for the system.
 Most of the program connects to the main.
 
@@ -94,7 +97,7 @@ This method does pretty much what it says. It gives back a profit report of all 
 This does the same thing as before, but it searches the database for the manager.
 
 @app.route("/createSale")
-This will create sales and lower or give price decreases on products in the database. Only the manager can access this functionality. 
+This will create sales and lower or give price decreases on products in the database. Only the manager can access this functionality.
 
 
 UserLoginPackage.py

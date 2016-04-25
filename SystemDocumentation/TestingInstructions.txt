@@ -5,5 +5,13 @@ To access and use the system please go to this url: https://cryptic-crag-17136.h
 You will be taken to http://cryptic-crag-17136.herokuapp.com/login
 
 Credentials for this are:
-Username:
+Username: <add these later>
 Password: <add these later>
+
+Enter those credentials in the username and password in the correct fields.
+
+After you log in you will be taken to the http://cryptic-crag-17136.herokuapp.com/pos page.
+Overview of the POS page:
+On the left side of the screen you will see buttons that say "Manager Page" and "Log Out"
+
+Manager Page: This will take you to the manager page, if you have the right credentials (You will)
