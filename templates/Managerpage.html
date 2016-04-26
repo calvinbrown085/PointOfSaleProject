@@ -10,18 +10,35 @@
 
 <div class="navigation">
 <form action="/managerSearch" method="post">
+
+
+
 <center><b>Generate Product orders</b></center>
+
+
 <p>
-<right><textarea name="textbox" rows="22" cols="50">
-{% for some in results %}
+
+
+<center><table>
+
 <tr>
-  <td><div id="IN" align:'left'>
-    </div> {{some[0]}}</td>
+<th>Name</th>
+<th>Product ID</th>
+<th>Purchase Price</th>
+<th>Amount In Stock</th>
+</tr>
+{% for item in lowInv %}
+<tr>
+<td>{{item[0]}}</td>
+<td>{{item[1]}}</td>
+<td>{{item[2]}}</td>
+<td>{{item[3]}}</td>
 </tr>
 {% endfor %}
-</textarea></right>
+</table></center>
 <center><input type="submit" name="productsearch" value="Order Products"><center>
 </form>
+
 
 </div>
 <table>

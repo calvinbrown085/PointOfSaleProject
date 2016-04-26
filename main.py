@@ -28,7 +28,7 @@ def index():
 
 @app.route("/managerPage")
 def managerPage():
-    return render_template("Managerpage.html", items = session.get("managerSearchList"),results = db.getItemsWithLowInventory())
+    return render_template("Managerpage.html", items = session.get("managerSearchList"),lowInv = db.getItemsWithLowInventory())
 
 @app.route("/form", methods=["POST"])
 def form():
