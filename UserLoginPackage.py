@@ -79,7 +79,7 @@ def login(db):
                     session["managerSearchList"] = []
                     session["searchList"] = []
                     if (db.getManagerStatus()[0][0] == 1):
-                        return redirect("/pos") #This will need to be changed to point to the manager page.
+                        return redirect("/managerPage")
                     else:
                         return redirect("/pos")
                 else:
