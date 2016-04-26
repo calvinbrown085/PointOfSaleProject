@@ -178,7 +178,7 @@ def managerSearch():
         session["managerSearchList"] = session.get("managerSearchList") + addToManagerSearchQuery(query)
     elif(searchType == "ProductID"):
         query = db.getById(str(userInput))
-        session["managerSearchList"] = session.get("managerSearchList") + addToManageSearchQuery(query)
+        session["managerSearchList"] = session.get("managerSearchList") + addToManagerSearchQuery(query)
     return redirect("/managerPage")
 
 
