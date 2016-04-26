@@ -13,7 +13,7 @@ products = []
 
 app.config.update(dict(
     #DEBUG=True,
-    SECRET_KEY= os.environ["Key"]))
+    SECRET_KEY= """os.environ["Key"]"""))
 
 @app.route("/")
 def singleSlash():
@@ -172,6 +172,7 @@ def profitReport():
 def managerSearch():
     searchType = request.args.get('ProductID')
     userInput = request.args.get('text')
+    userInput = userInput.title()
     session["managerSearchList"] = []
     if(searchType == "Name"):
         query = db.getByName(str(userInput))
@@ -229,11 +230,7 @@ def managerUpdate():
 
     if(amountInStock == ""):
         amountInStock = db.getById(productId)[0][6]
-    print(productId)
-    print(purchasePrice)
-    print(sellingPrice)
     db.updateInventoryItem(name,int(productId),float(purchasePrice),float(sellingPrice),seller,productType,int(amountInStock))
-    print("here")
     return redirect("/managerPage")
 
 @app.route("/transactions")
