@@ -7,50 +7,38 @@
     <table border="4" style="width:50%">
       <tr>
         <th>
-          Name
+          Transaction Id
         </th>
         <th>
-          Product Id
+          Payment Method
         </th>
         <th>
-          Purchase Price
+          Payment Amount
         </th>
         <th>
-          Selling Price
+          Items Purchased
         </th>
         <th>
-          Seller
-        </th>
-        <th>
-          Product Type
-        </th>
-        <th>
-          Amount In Stock
+          Date
         </th>
       </tr>
-      {% for item in items %}
+      {% for transaction in transactions %}
       <tr>
         <td>
-         {{item[0]}}
+         {{transaction[0]}}
         </td>
         <td>
-         {{item[1]}}
+         {{transaction[1]}}
        </td>
        <td>
-         {{item[2]}}
+         {{transaction[2]}}
        </td>
        <td>
-         {{item[3]}}
+         {{transaction[3]}}
        </td>
       <td>
-         {{item[4]}}
+         {{transaction[4]}}
       </td>
-      <td>
-         {{item[5]}}
-      </td>
-      <td>
-         {{item[6]}}
-        </td>
       </tr>
       {% endfor %}
     </table>

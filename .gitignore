@@ -2,3 +2,5 @@
 *.pyc
 venv
 databaseurl.txt
+.cache
+creds.txt

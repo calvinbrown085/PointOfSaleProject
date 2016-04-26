@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profit Report</title>
+  </head>
+  <body>
+    {% for item in report %}
+      {{item[0]}},
+      {{item[1]}},
+      {{item[2]}}
+      <br>
+    {% endfor %}
+  </body>
+</html>
