@@ -195,5 +195,10 @@ def clearCart():
     session["totalAmount"] = 0.00
     return redirect("/pos")
 
+@app.route("/transactions")
+def transactions():
+    print(db.getTransactions())
+    return render_template("transactions.html", transactions = db.getTransactions())
+
 if (__name__ == "__main__"):
     app.run()

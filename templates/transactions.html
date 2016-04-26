@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Index</title>
+  </head>
+  <body>
+    <table border="4" style="width:50%">
+      <tr>
+        <th>
+          Transaction Id
+        </th>
+        <th>
+          Payment Method
+        </th>
+        <th>
+          Payment Amount
+        </th>
+        <th>
+          Items Purchased
+        </th>
+        <th>
+          Date
+        </th>
+      </tr>
+      {% for transaction in transactions %}
+      <tr>
+        <td>
+         {{transaction[0]}}
+        </td>
+        <td>
+         {{transaction[1]}}
+       </td>
+       <td>
+         {{transaction[2]}}
+       </td>
+       <td>
+         {{transaction[3]}}
+       </td>
+      <td>
+         {{transaction[4]}}
+      </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="/pos">back</a>
+  </body>
+</html>
