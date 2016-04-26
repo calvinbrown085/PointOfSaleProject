@@ -195,5 +195,44 @@ def clearCart():
     session["totalAmount"] = 0.00
     return redirect("/pos")
 
+@app.route("/managerUpdate")
+def managerUpdate():
+    productId = request.args.get('productId')
+    name = request.args.get('Name')
+    purchasePrice = request.args.get('purchasePrice')
+    sellingPrice = request.args.get('sellingPrice')
+    seller = request.args.get('Seller')
+    productType = request.args.get('productType')
+    amountInStock = request.args.get('amountInStock')
+    item = db.getById(int(productId))
+
+    if(item == []):
+
+        db.insertNewInventoryItem(int(productId),name,float(purchasePrice),float(sellingPrice),seller,productType,int(amountInStock))
+    elif(productId == ""):
+        print("Ethan please put an error here")
+    if(name == ""):
+        name = db.getById(productId)[0][0]
+
+    if(purchasePrice == ""):
+        purchasePrice = db.getById(int(productId))[0][2]
+
+    if(sellingPrice == ""):
+        sellingPrice = db.getById(productId)[0][3]
+
+    if(seller == ""):
+        seller = db.getById(productId)[0][4]
+
+    if(productType == ""):
+        productType = db.getById(productId)[0][5]
+
+    if(amountInStock == ""):
+        amountInStock = db.getById(productId)[0][6]
+    print(productId)
+    print(purchasePrice)
+    print(sellingPrice)
+    db.updateInventoryItem(name,int(productId),float(purchasePrice),float(sellingPrice),seller,productType,int(amountInStock))
+    print("here")
+    return redirect("/managerPage")
 if (__name__ == "__main__"):
     app.run()
