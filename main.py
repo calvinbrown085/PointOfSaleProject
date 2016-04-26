@@ -36,10 +36,12 @@ def form():
     db.storeEmail(email)
     return redirect("/")
 
-@app.route("/writeEmail", methods=["POST"])
+@app.route("/writeEmail")
 def writeEmail():
-    newCustomer(str(request.form["customer_name"]),str(request.form["customer_email"]))
-    return redirect("/")
+    name = request.args.get('cardNumber')
+    email = request.args.get('exp')
+    db.writeEmailToDatabase(name,email)
+    return redirect("/checkout")
 
 @app.route("/writeTransaction", methods=["POST"])
 def writeTransaction():
@@ -240,6 +242,7 @@ def managerUpdate():
 def transactions():
     print(db.getTransactions())
     return render_template("transactions.html", transactions = db.getTransactions())
+
 
 
 if (__name__ == "__main__"):
