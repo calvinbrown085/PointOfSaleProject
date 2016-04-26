@@ -172,13 +172,14 @@ def profitReport():
 def managerSearch():
     searchType = request.args.get('ProductID')
     userInput = request.args.get('text')
+    userInput = userInput.title()
     session["managerSearchList"] = []
     if(searchType == "Name"):
         query = db.getByName(str(userInput))
         session["managerSearchList"] = session.get("managerSearchList") + addToManagerSearchQuery(query)
     elif(searchType == "ProductID"):
         query = db.getById(str(userInput))
-        session["managerSearchList"] = session.get("managerSearchList") + addToManageSearchQuery(query)
+        session["managerSearchList"] = session.get("managerSearchList") + addToManagerSearchQuery(query)
     return redirect("/managerPage")
 
 
@@ -229,11 +230,7 @@ def managerUpdate():
 
     if(amountInStock == ""):
         amountInStock = db.getById(productId)[0][6]
-    print(productId)
-    print(purchasePrice)
-    print(sellingPrice)
     db.updateInventoryItem(name,int(productId),float(purchasePrice),float(sellingPrice),seller,productType,int(amountInStock))
-    print("here")
     return redirect("/managerPage")
 
 @app.route("/transactions")
