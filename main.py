@@ -107,6 +107,9 @@ def cart():
         return redirect("/pos")
     name = searchResult[0][0]
     quantity = request.form["quantity"]
+    if (int(quantity) > int(searchResult[0][6])):
+
+        return redirect("/pos")
     price = searchResult[0][3] * int(quantity)
     itemList = [itemNumber, name, quantity, str(price)]
     session["resultList"] = session.get("resultList") + [itemList]
