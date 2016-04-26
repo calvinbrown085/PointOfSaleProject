@@ -1,5 +1,62 @@
 Project Report.
 
-First we will go over what we have ready to deliver.
+First we will go over what we have delivered, we will go over each priority and tell what we have delivered.
 
-Not really sure maybe we can talk about this on Tuesday. 
+High Priority:
+We have output that is readable, but we weren't able to get it into csv format for inputting into Excel
+As a manager you are able to generate weekly sales and profit reports.
+As a manager you can input sale prices from the manager page.
+As a manager you are able to override products and set them to what the manager wants.
+
+Medium Priority:
+We were able to get (semi) automatic purchase orders, whenever a product has lower than 5 items in the inventory it will ask if you want to order more
+Every transaction is saved in the database, and can be used by the manager
+You can order more products in case of spoiled/stolen products from the manger page
+We are able to search the inventory from the manager and the cashier page, but we don't have a method of sorting it.
+
+Low Priority:
+We weren't able to tell when products expired/spoiled
+We do have user modes, the a person that is a cashier can access the POS cashier page, but they can't access the manager page.
+A set of manager credentials can access the manager page and the cashier page so they can do both. You can tell who's credentials are
+mangers within the database.
+
+We will now give a brief overview of the product.
+
+The product runs on https://cryptic-crag-17136.herokuapp.com
+
+Which will ask you to log in, you can log into this with your assigned
+username and password
+
+After logging in you will be taken to https://cryptic-crag-17136.herokuapp.com/pos this page is the page that the cashier will see when using the product.
+We will give a brief overview of the pos page.
+
+On the lefthand side of the screen there are 3 buttons
+Manager Page - This will take you to the manager page if you are a manager
+Log Out - This will log the current user out
+Inventory - This will give a table of the whole inventory table in the database
+
+To the right of that you will see a search box with a drop down menu under it and another table underneath that.
+This is the search part of the page! As a cashier you can either search by Price, Product Id, Product Name, or Supplier
+The top bar is where you enter your input, if the search finds something it will show up in the box underneath it, otherwise it will stay blank
+
+On the right side of the screen you will see another table that looks like the table on the other side of the page.
+This is the cart that keeps track of what the customer is buying. The cashier enters the product id and how many the customer wants of the item
+The cart will keep track of the total amount as well.
+
+Moving on..
+After the customer has no items left we can move on to the checkout page, you should see a familiar table on the right, all of the items
+that were in the cart should be in the table on this page.
+The customer can pay either with cash or credit, and after you enter the respective information in the fields the cashier can hit submit and will
+create a transaction that goes in the database.
+
+Going back to the pos page, both the search table and the cart should be clear and the total amount is reset to 0 for a new customer!
+
+If you are a manager you can click on the Manager Page button on the left hand side of the screen.
+Now onto the manager page!
+
+You should see some products in the table on the page, those are products that you are low on! With one click of a button you can order more of those products!
+
+On the left hand side you can see some empty fields that have "Update Product Information - Please enter any Product Id and any info you want updated".
+Here is where you can override any product in the database, You will need the product id, but any other information is optional to update.
+
+At the bottom of the screen you can create a sale by entering the product id and the new sale price, and click the "Create Sale" button and it will be updated!

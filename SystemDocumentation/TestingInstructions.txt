@@ -42,3 +42,9 @@ On the right side you should see 2 ways to pay. Choose one!
 Enter you amount either on the credit card or with cash. <checkout button>?
 
 After you check out you will be taken back to the pos page, where you can start again with a new customer.
+
+Now we can go look at the manager page!
+
+On this page you will see a lot of things,
+
+<fill in this information later>

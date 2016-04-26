@@ -46,6 +46,8 @@ inventory.html
 - This will give all of the inventory items in the database
 profitReport.html
 - Not sure what to put here?
+transactions.html
+- This will give a list of transactions that have happened within the POS system
 
 In the ProcessStuff/ directory don't worry about that, it just has information like previous turn ins for our group.
 

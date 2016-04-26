@@ -36,7 +36,7 @@ These are only supposed to be used in Database.py class.
 
 DatabaseUtils.py -
 
-main.py - 
+main.py -
 Overview: This is the brain of our program. It handles all the internet requests, and handles all of the routes for the system.
 Most of the program connects to the main.
 
@@ -100,7 +100,7 @@ This does the same thing as before, but it searches the database for the manager
 This will create sales and lower or give price decreases on products in the database. Only the manager can access this functionality.
 
 
-UserLoginPackage.py
+UserLoginPackage.py -
 Overview: This code allows us to make users and create session objects for those users and allow them to log in and use the system.
 
 The login html is used to when requireLogin is called
@@ -116,3 +116,52 @@ logout: This function logs both managers and cashiers out, it clears all session
 
 login: This function is used to log a user in and it will check the username and the password to make sure they are both correct and in the db, it will then
 create new session object associated with that user so we can have multiple users going at the same time not just one person using it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Database Information(Data) -
+Overview: This will cover what tables are in the database and more information about each table in depth.
+There are 5 tables in the database we will go into more depth about them below.
+customer_emails:
+There are 2 columns in this table.
+customer_name - this is the customers name
+customer_email - this is the customers email
+___________________
+employee_credentials:
+There are 3 columns in the table.
+username - this is the username the user uses to log in
+password - this is the users password. *Note: This password is hashed for security
+ismanager - this tells the application whether or not the user is a manager or not
+___________________
+inventory:
+There are 7 columns in this table.
+name - this is the products name
+product_id - this is the unique product id
+purchase_price - this is the products price that the store pays
+selling_price - this is the price that the store sells it for
+supplier - this is who the store buys the product from
+product_type - this is the type of the product
+amount_in_stock - this is how many products the store has in stock
+____________________
+inventory_log:
+There are 3 columns in this table.
+product_id - this is the unique product id tied to the product
+products_recieved - this is how many products the store has purchased
+products_sold - this is how many products the store has sold
+_____________________
+transactions
+There are 5 columns in this table.
+transaction_id - this is a unique number for a transaction in the database
+payment_method - this is how the customer payed, either cash or credit
+payment_amount - this is how much the customer paid for their items
+items_purchased - this is a list of the items purchased
