@@ -195,6 +195,7 @@ def clearCart():
     session["totalAmount"] = 0.00
     return redirect("/pos")
 
+
 @app.route("/managerUpdate")
 def managerUpdate():
     productId = request.args.get('productId')
@@ -234,5 +235,12 @@ def managerUpdate():
     db.updateInventoryItem(name,int(productId),float(purchasePrice),float(sellingPrice),seller,productType,int(amountInStock))
     print("here")
     return redirect("/managerPage")
+
+@app.route("/transactions")
+def transactions():
+    print(db.getTransactions())
+    return render_template("transactions.html", transactions = db.getTransactions())
+
+
 if (__name__ == "__main__"):
     app.run()

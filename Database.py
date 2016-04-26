@@ -45,6 +45,9 @@ class Database():
     def totalItemsBoughtFromProductId(self,productId):
         return self.db.readQuery("""select products_recieved from inventory_log where product_id = '{}'""".format(productId))
 
+    def getTransactions(self):
+        return self.db.readQuery("""select * from transactions""")
+
     """User Queries"""
 
     def getUser(self, username):
