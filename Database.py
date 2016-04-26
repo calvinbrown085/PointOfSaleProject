@@ -81,7 +81,8 @@ class Database():
     """Update Queries"""
 
     def updateInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):
-        self.db.writeQuery("""update inventory set name ='{}', product_id = '{}',original_cost = '{}', selling_price = '{}',supplier = '{}',product_type = '{}',amount_in_stock = '{}','{}')""".format(name,productId, originalCost, sellPrice, supplier, productType, amountInStock))
+        self.db.writeQuery("""update inventory set name ='{}',
+        purchase_price = '{}', selling_price = '{}', supplier = '{}', product_type = '{}', amount_in_stock = '{}' where product_id='{}'""".format(name, originalCost, sellPrice, supplier, productType, amountInStock,productId))
 
     def updateInventoryLog(self, productId,howManyPurchased):
         inventoryLogGet = self.getFromInventoryLogByProductId(productId)
