@@ -10,17 +10,9 @@
 
 <div class="navigation">
 <form action="/managerSearch" method="post">
-
-
-
 <center><b>Generate Product orders</b></center>
-
-
 <p>
-
-
 <center><table>
-
 <tr>
 <th>Name</th>
 <th>Product ID</th>
@@ -29,18 +21,19 @@
 </tr>
 {% for item in lowInv %}
 <tr>
-<td>{{item[0]}}</td>
-<td>{{item[1]}}</td>
-<td>{{item[2]}}</td>
-<td>{{item[3]}}</td>
+<td align="center">{{item[0]}}</td>
+<td align="center">{{item[1]}}</td>
+<td align="center">{{item[2]}}</td>
+<td align="center">{{item[3]}}</td>
 </tr>
 {% endfor %}
 </table></center>
-<center><input type="submit" name="productsearch" value="Order Products"><center>
+<center>
+<input type="submit" name="productsearch" value="Order Products">
+</center>
 </form>
-
-
 </div>
+
 <table>
 <tr>
 <td>
@@ -50,6 +43,14 @@
 </select>
 </td>
 <td><input type="text" name="text"></td><td><input type="submit" name="Search"></td></tr>
+<tr>
+<td><a href="/pos"><button type="button">Cashier Page</button>
+</td>
+</tr>
+<tr>
+<td><a href="/logout"><button type="button">Logout</button>
+</td>
+</tr>
 </table>
 </form>
 
@@ -70,6 +71,8 @@
 </tr>
 </table>
 <p><input type="submit" name="Update" value="Update">
+<br>
+<br>
 <a href="/transactions"><button type="button">Transactions</button></a><br><br>
 <tr>
 <td>
