@@ -67,7 +67,8 @@ def searchEmailsByName():
 @app.route("/inventory")
 def inventory():
     requireLogin()
-    return render_template("inventory.html", items = db.getItems())
+    sortedItems = sorted(db.getItems(), key=lambda x: x[1])
+    return render_template("inventory.html", items = sortedItems)
 
 @app.route("/emailList")
 def emails():
