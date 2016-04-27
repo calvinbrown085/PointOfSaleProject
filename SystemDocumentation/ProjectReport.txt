@@ -48,6 +48,7 @@ After the customer has no items left we can move on to the checkout page, you sh
 that were in the cart should be in the table on this page.
 The customer can pay either with cash or credit, and after you enter the respective information in the fields the cashier can hit submit and will
 create a transaction that goes in the database.
+You can also ask your customer for their email and name, if they say no don't worry, its optional!
 
 Going back to the pos page, both the search table and the cart should be clear and the total amount is reset to 0 for a new customer!
 
