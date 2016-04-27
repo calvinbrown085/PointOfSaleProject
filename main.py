@@ -3,6 +3,7 @@ from Database import Database
 from UserLoginPackage import *
 from DatabaseUtils import *
 import os
+from Errors import *
 
 db = Database()
 app = Flask(__name__)
@@ -12,7 +13,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    #DEBUG=True,
+    DEBUG=True,
     SECRET_KEY= os.environ["Key"]))
 
 @app.route("/")
@@ -96,28 +97,42 @@ def superSecret():
 @app.route("/pos")
 def pos():
     requireLogin()
-    return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"), searchResults = session.get("searchList"))
+    return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"), searchResults = session.get("searchList"), errorText = session.get("error"))
 
 @app.route("/cart", methods=["POST"])
 def cart():
     requireLogin()
     itemNumber = request.form["ItemNumber"]
+    if (itemNumber == ""):
+        session["error"] = invalidProductId()
+        return redirect("/pos")
     searchResult = db.getById(int(itemNumber))
-    if (searchResult == [] or request.form["quantity"] == ""):
+    if (searchResult == []):
+        session["error"] = invalidProductId()
+        return redirect("/pos")
+    elif (request.form["quantity"] == ""):
+        session["error"] = invalidAmount()
         return redirect("/pos")
     name = searchResult[0][0]
     quantity = request.form["quantity"]
     if (int(quantity) > int(searchResult[0][6])):
-
+        session["error"] = insufficientInventory()
         return redirect("/pos")
     price = searchResult[0][3] * int(quantity)
     itemList = [itemNumber, name, quantity, str(price)]
     session["resultList"] = session.get("resultList") + [itemList]
     session["totalAmount"] = str(getTotalPrice(session.get("resultList")))
+    session["error"] = ""
+    return redirect("/pos")
+
+@app.route("/closeError", methods=["POST"])
+def closeError():
+    session["error"] = ""
     return redirect("/pos")
 
 @app.route("/checkout")
 def checkout():
+    session["error"] = ""
     return render_template("checkout.html", results = session.get("resultList"), totalPrice = session.get("totalAmount"))
 
 @app.route("/payment")
@@ -164,7 +179,7 @@ def search():
     elif (searchBy == "supply"):
         query = db.getBySupplier(str(userInput))
         session["searchList"] = session.get("searchList") + addToSearchQuery(query)
-
+    session["error"] = ""
     return redirect("/pos")
 @app.route("/profitReport")
 def profitReport():
@@ -197,6 +212,7 @@ def createManagerSale():
 def clearCart():
     session["resultList"] = []
     session["totalAmount"] = 0.00
+    session["error"] = ""
     return redirect("/pos")
 
 
