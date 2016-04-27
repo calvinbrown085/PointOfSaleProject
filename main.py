@@ -13,7 +13,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    DEBUG=True,
+    #DEBUG=True,
     SECRET_KEY= os.environ["Key"]))
 
 @app.route("/")
