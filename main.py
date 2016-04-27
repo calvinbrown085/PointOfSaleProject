@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 from Database import Database
 from UserLoginPackage import *
 from DatabaseUtils import *
-import os
+from SecretKeyGenerator import generateKey
 
 db = Database()
 app = Flask(__name__)
@@ -13,7 +13,7 @@ products = []
 
 app.config.update(dict(
     DEBUG=True,
-    SECRET_KEY= "Key"))
+    SECRET_KEY= generateKey()))
 
 @app.route("/")
 def singleSlash():
