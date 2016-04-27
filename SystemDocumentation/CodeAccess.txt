@@ -1,7 +1,6 @@
 This document will give access to our groups code for perusal and printing.
 
-To access our groups code please visit:
-https://github.com/ethanphunter/PointOfSaleProject
+To access our groups code please unzip the POS.zip file and all of the files in here will be explained below.
 
 Below this will be an explanation of how to view the code.
 
