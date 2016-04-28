@@ -14,7 +14,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    DEBUG=True,
+    #DEBUG=True,
     SECRET_KEY= generateKey()))
 
 @app.route("/")
@@ -253,6 +253,7 @@ def managerUpdate():
     if(amountInStock == ""):
         amountInStock = db.getById(productId)[0][6]
     db.updateInventoryItem(name,int(productId),float(purchasePrice),float(sellingPrice),seller,productType,int(amountInStock))
+    #db.updateInventoryLog(int(productId), int(amountInStock))
     return redirect("/managerPage")
 
 @app.route("/transactions")
