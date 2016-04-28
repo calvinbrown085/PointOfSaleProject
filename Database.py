@@ -89,6 +89,16 @@ class Database():
         amountSold =  inventoryLogGet[0][2] + int(howManyPurchased)
         self.db.writeQuery("""update inventory_log set products_sold = '{}' where product_id = '{}'""".format(amountSold, productId))
 
+    def updateInventoryLogItemsPurchased(self, productId,howManyRecieved):
+        inventoryLogGet = self.getFromInventoryLogByProductId(productId)
+        amountBought =  inventoryLogGet[0][2] + int(howManyRecieved)
+        self.db.writeQuery("""update inventory_log set products_recieved = '{}' where product_id = '{}'""".format(amountBought, productId))
+
+    def orderNewProducts(self,productId, howManyPurchased):
+        inventoryGet = self.getById(productId)
+        amountInStock =  inventoryGet[0][6] + int(howManyPurchased)
+        self.db.writeQuery("""update inventory set amount_in_stock = '{}' where product_id = '{}'""".format(amountInStock, productId))
+
     def createSale(self,productId, newPrice):
         self.db.writeQuery("""update inventory set selling_price = '{}' where product_id = '{}'""".format(newPrice, productId))
 

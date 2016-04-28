@@ -12,7 +12,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    DEBUG=True,
+    # DEBUG=True,
     SECRET_KEY= generateKey()))
 
 @app.route("/")
@@ -27,6 +27,7 @@ def singleSlash():
 
 @app.route("/managerPage")
 def managerPage():
+<<<<<<< HEAD
     requireManagerLogin(db)
     return render_template("Managerpage.html", items = session.get("managerSearchList"),results = db.getItemsWithLowInventory())
 
@@ -35,6 +36,22 @@ def writeEmail():
     requireLogin()
     newCustomer(str(request.form["customer_name"]),str(request.form["customer_email"]))
     return redirect("/")
+=======
+    return render_template("Managerpage.html", items = session.get("managerSearchList"),lowInv = db.getItemsWithLowInventory())
+
+@app.route("/form", methods=["POST"])
+def form():
+    email = request.form["email"]
+    db.storeEmail(email)
+    return redirect("/")
+
+@app.route("/writeEmail")
+def writeEmail():
+    name = request.args.get('cardNumber')
+    email = request.args.get('exp')
+    db.writeEmailToDatabase(name,email)
+    return redirect("/checkout")
+>>>>>>> master
 
 @app.route("/searchInventoryById", methods=["POST"])
 def searchById():
@@ -234,6 +251,19 @@ def managerUpdate():
 def transactions():
     requireManagerLogin(db)
     return render_template("transactions.html", transactions = db.getTransactions())
+
+@app.route("/orderMoreProducts")
+def productOrder():
+    lowInv = db.getItemsWithLowInventory()
+    for item in lowInv:
+        amount = item[6]
+        amount *= 2
+        print(amount)
+        db.updateInventoryLogItemsPurchased(int(item[1]),int(amount))
+        db.orderNewProducts(int(item[1]), int(amount))
+    return redirect("/managerPage")
+
+
 
 
 if (__name__ == "__main__"):
