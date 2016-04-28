@@ -241,6 +241,18 @@ def transactions():
     print(db.getTransactions())
     return render_template("transactions.html", transactions = db.getTransactions())
 
+@app.route("/orderMoreProducts")
+def productOrder():
+    lowInv = db.getItemsWithLowInventory()
+    for item in lowInv:
+        amount = item[6]
+        amount *= 2
+        print(amount)
+        db.updateInventoryLogItemsPurchased(int(item[1]),int(amount))
+        db.orderNewProducts(int(item[1]), int(amount))
+    return redirect("/managerPage")
+
+
 
 if (__name__ == "__main__"):
     app.run()
