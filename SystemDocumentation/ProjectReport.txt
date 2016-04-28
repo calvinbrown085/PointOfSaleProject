@@ -29,7 +29,9 @@ Which will ask you to log in, you can log into this with your assigned
 username and password
 
 Something to note: If you have manager credentials when you sign in you will be taken to https://cryptic-crag-17136.herokuapp.com/managerPage
-otherwise you will be taken to the pos page. 
+If you have cashier credentials you will be taken to https://cryptic-crag-17136.herokuapp.com/pos
+
+If you have neither set of credentials you will be taken to the login page
 
 After logging in you will be taken to https://cryptic-crag-17136.herokuapp.com/pos this page is the page that the cashier will see when using the product.
 We will give a brief overview of the pos page.
