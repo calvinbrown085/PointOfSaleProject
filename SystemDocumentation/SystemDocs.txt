@@ -22,12 +22,12 @@ DatabaseUrlGenerator.py -
 Overview: This file will get the database url for local development and for production development so we don't have that in our codebase
 
 Use Cases:
-getLines(): This will get database info from a text file on production.
+getLines(): This will get database info from a local text file, only used for local development
 
-getDatabaseUrl(): This will grab the database url from the text file and actually use it in the DbConnection.py file
+getDatabaseUrl(): This will grab the database url locally text file and is used for local development
 
 DbConnection.py -
-Overview: This is the code that handles the returning and connecting to the URL of the database. This is a pretty simple interaction.
+Overview: This is the code that handles the connecting to the database. This is a pretty simple interaction.
 This class is only used in the Database.py class, it allows for that class to connect to the database on Heroku.
 
 Use Cases:
@@ -67,7 +67,7 @@ addToManagerSearchQuery, this will do the same thing as above but for the manage
 
 main.py -
 Overview: This is the brain of our program. It handles all the internet requests, and handles all of the routes for the system.
-Most of the program connects to the main.
+All of the program connects to the main.
 
 Use Cases: Its hard to gauge use cases for this function since none of its functions can really be called but we will still go over what they do.
 We will be covering what the routes do.
@@ -132,7 +132,7 @@ This will create sales and lower or give price decreases on products in the data
 UserLoginPackage.py -
 Overview: This code allows us to make users and create session objects for those users and allow them to log in and use the system.
 
-The login html is used to when requireLogin is called
+The login html is used when a get request is sent to the /login endpoint
 
 loginErrorHtml is thrown when someone enters bad credentials
 
@@ -144,7 +144,7 @@ requireManagerLogin: This function can be called where a manager is supposed to 
 logout: This function logs both managers and cashiers out, it clears all session objects associated with them as well.
 
 login: This function is used to log a user in and it will check the username and the password to make sure they are both correct and in the db, it will then
-create new session object associated with that user so we can have multiple users going at the same time not just one person using it.
+When you visit the site a session object is created for you, this login method sets keys to be used later in the program.
 
 
 
@@ -154,11 +154,11 @@ customer.
 
 Use Cases:
 
-getCreds, this function will get the credentials from a file to run the tests with.
+getCreds, this function will get the credentials for local testing. 
 
 client, this will send a request to our site to make sure its up and working
 
-test_client, makes sure the log in page pops up when we access the site.
+test_client, makes sure the login page pops up when we access the site.
 
 test_inventory, makes sure the inventory endpoint gives something back when we hit it.
 
@@ -168,7 +168,7 @@ test_logout, makes sure the logout endpoint is up and running.
 
 
 
-Database Information(Data) - Our database is also hosted on heroku, it is accessed through our code using heroku toolbelt. 
+Database Information(Data) - Our database is also hosted on heroku, it is accessed through our code using psycopg2. 
 Overview: This will cover what tables are in the database and more information about each table in depth.
 There are 5 tables in the database we will go into more depth about them below.
 customer_emails:
