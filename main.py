@@ -13,7 +13,7 @@ products = []
 
 app.config.update(dict(
     #DEBUG=True,
-    SECRET_KEY= os.environ["Key"]))
+    SECRET_KEY= """os.environ["Key"]"""))
 
 @app.route("/")
 def singleSlash():
@@ -28,7 +28,7 @@ def index():
 
 @app.route("/managerPage")
 def managerPage():
-    return render_template("Managerpage.html", items = session.get("managerSearchList"),results = db.getItemsWithLowInventory())
+    return render_template("Managerpage.html", items = session.get("managerSearchList"),lowInv = db.getItemsWithLowInventory())
 
 @app.route("/form", methods=["POST"])
 def form():
@@ -242,6 +242,18 @@ def managerUpdate():
 def transactions():
     print(db.getTransactions())
     return render_template("transactions.html", transactions = db.getTransactions())
+
+@app.route("/orderMoreProducts")
+def productOrder():
+    lowInv = db.getItemsWithLowInventory()
+    for item in lowInv:
+        amount = item[6]
+        amount *= 2
+        print(amount)
+        db.updateInventoryLogItemsPurchased(int(item[1]),int(amount))
+        db.orderNewProducts(int(item[1]), int(amount))
+    return redirect("/managerPage")
+
 
 
 

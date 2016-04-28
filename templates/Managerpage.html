@@ -9,21 +9,34 @@
 
 
 <div class="navigation">
-<form action="/managerSearch" method="post">
+<form action="/orderMoreProducts">
 <center><b>Generate Product orders</b></center>
 <p>
-<right><textarea name="textbox" rows="22" cols="50">
-{% for some in results %}
+<center><table>
 <tr>
-  <td><div id="IN" align:'left'>
-    </div> {{some[0]}}</td>
+<th>Name</th>
+<th>Product ID</th>
+<th>Purchase Price</th>
+<th>Amount In Stock</th>
+</tr>
+{% for item in lowInv %}
+<tr>
+<td align="center">{{item[0]}}</td>
+<td align="center">{{item[1]}}</td>
+<td align="center">{{item[2]}}</td>
+<td align="center">{{item[6]}}</td>
 </tr>
 {% endfor %}
-</textarea></right>
-<center><input type="submit" name="productsearch" value="Order Products"><center>
+<input type="submit" name="productsearch" value="Order Products"></input>
+</table></center>
+<center>
+
+</center>
+
 </form>
 
 </div>
+
 <table>
 <tr>
 <td>
@@ -33,6 +46,14 @@
 </select>
 </td>
 <td><input type="text" name="text"></td><td><input type="submit" name="Search"></td></tr>
+<tr>
+<td><a href="/pos"><button type="button">Cashier Page</button>
+</td>
+</tr>
+<tr>
+<td><a href="/logout"><button type="button">Logout</button>
+</td>
+</tr>
 </table>
 </form>
 
@@ -53,7 +74,12 @@
 </tr>
 </table>
 <p><input type="submit" name="Update" value="Update">
-<a href="/transactions"><button type="button">Transactions</button></a><br><br>
+<br>
+<br>
+<a href="/transactions"><button type="button">Transactions</button></a><br>
+<br>
+<br>
+<a href="/profitReport"><button type="button">Profit Report</button></a><br><br>
 <tr>
 <td>
 <center>
@@ -100,23 +126,6 @@
 </td>
 </form>
 <td>
-<table border="1" align="center">
-<tr>
-<th colspan="3"><center>Weekly Profit report</center></th>
-</tr>
-<tr>
-<td>//</td>
-<td>//</td>
-<td>//</td>
-</tr>
-{% for item in items %}
-<tr>
-<td>{{item[1]}}</td>
-<td>{{item[2]}}</td>
-<td>{{item[3]}}</td>
-</tr>
-{% endfor %}
-</table>
 </center>
 </td>
 </tr>
