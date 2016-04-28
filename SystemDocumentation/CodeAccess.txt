@@ -13,8 +13,7 @@ inventory.html, Managerpage.html, POS.html, inventory.html, transactions.html
 
 Thats our whole code base, but below are short descriptions of the files. 
 
-In the root directory of github you will find, we will explain what these files are under them. This is where the bulk of our code is.
-- Please ignore this file it just allows us to run tests for our code
+In the root directory of the zip folder you will find, we will explain what these files are under them. This is where the bulk of our code is.
 Database.py
 - This is the database class we use to access the database, please visit the system documentation for more information
 DatabaseUrlGenerator.py
@@ -30,7 +29,7 @@ main.py
 script.py
 - These are tests for our code. They get run before our pipeline gets deployed.
 
-In the templates/ folder is all of our code for the html of the project.
+In the templates/ folder is all of our html code for the project.
 In this directory you will find:
 
 Managerpage.html:
@@ -44,7 +43,7 @@ emailSearchResults.html:
 inventory.html:
 - This will give all of the inventory items in the database
 profitReport.html:
-- Not sure what to put here?
+- This is the report html for generating csv reports
 transactions.html:
 - This will give a list of transactions that have happened within the POS system
 
