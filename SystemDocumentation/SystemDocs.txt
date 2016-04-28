@@ -1,4 +1,4 @@
-This is the system documentation for our POS System. It will cover all the files in our system one by one and telling what they do.
+This is the system documentation for our POS System. It will cover all the files in our system and go one by one and describing what they do.
 
 In the root directory you will find these files that contribute to our project.
 
@@ -18,7 +18,13 @@ the database.
 We have our Update queries, these queries don't insert any new rows into the database, but they will update existing rows in the
 database.
 
+DatabaseUrlGenerator.py -
+Overview: This file will get the database url for local development and for production development so we don't have that in our codebase
 
+Use Cases:
+getLines(): This will get database info from a text file on production.
+
+getDatabaseUrl(): This will grab the database url from the text file and actually use it in the DbConnection.py file
 
 DbConnection.py -
 Overview: This is the code that handles the returning and connecting to the URL of the database. This is a pretty simple interaction.
@@ -35,6 +41,29 @@ These are only supposed to be used in Database.py class.
 
 
 DatabaseUtils.py -
+Overview: This is a file that holds a lot of logic and utilities away from the queries and the main file.
+
+Use Cases:
+
+getTotalPrice, this will get the total price for the items in the users cart it is used in the main.py file.
+
+newCustomer, this will write a name and an email to the database.
+
+newTransaction, this will write a new transaction to the database with a random transaction id associated with it.
+
+listToString, this function will take the list of items from the cart and make them a list for transactions inserting.
+
+createSale, this function will create a sale from the manager page and do the appropriate things in the database.
+
+moneyMadeFromProduct, this function will calculate the money made from each product in your inventory. Available from the manager page.
+
+generateReport, this will create a report of all the items in the database with the moneyMadeFromProduct on them.
+
+purchasedItems, this function will subtract purchased items from the inventory_log when someone buys something from the inventory.
+
+addToSearchQuery, this adds things to the cashiers search query.
+
+addToManagerSearchQuery, this will do the same thing as above but for the manager only.
 
 main.py -
 Overview: This is the brain of our program. It handles all the internet requests, and handles all of the routes for the system.
@@ -119,13 +148,23 @@ create new session object associated with that user so we can have multiple user
 
 
 
+script.py -
+Overview: This code allows us to run tests before deploying our production environment. It makes sure there are no errors in anything we have coded before giving it to the
+customer.
 
+Use Cases:
 
+getCreds, this function will get the credentials from a file to run the tests with.
 
+client, this will send a request to our site to make sure its up and working
 
+test_client, makes sure the log in page pops up when we access the site.
 
+test_inventory, makes sure the inventory endpoint gives something back when we hit it.
 
+test_pos, hits the pos page to make sure its up and running.
 
+test_logout, makes sure the logout endpoint is up and running.
 
 
 

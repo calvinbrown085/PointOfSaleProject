@@ -1,13 +1,19 @@
-This document will give access to our groups code for perusal and printing.
+This document will give information about our groups code for perusal and printing.
 
 To access our groups code please unzip the POS.zip file and all of the files in here will be explained below.
 
-Below this will be an explanation of how to view the code.
+Below this will be a brief explanation of each file.
 
-In the root directory of github you will find, we will explain what these files are under them.
-.gitignore
-- Please ignore this file it just keeps us from adding files we don't need.
-.travis.yml
+For easy instructions on printing the files in the
+root directory you need to print would be:
+Database.py, DatabaseUrlGenerator.py, DatabaseUtils.py, DbConnection.py, UserLoginPackage.py, main.py, script.py
+
+In the templates/ folder for printing:
+inventory.html, Managerpage.html, POS.html, inventory.html, transactions.html
+
+Thats our whole code base, but below are short descriptions of the files. 
+
+In the root directory of github you will find, we will explain what these files are under them. This is where the bulk of our code is.
 - Please ignore this file it just allows us to run tests for our code
 Database.py
 - This is the database class we use to access the database, please visit the system documentation for more information
@@ -17,35 +23,29 @@ DatabaseUtils.py
 - This is a file of utilities so we can keep logic out of the database class, please visit the system documentation for more information
 DbConnection.py
 - This is the class that allows us to connect to the database, please visit the system documentation for more information
-Procfile
-- Please ignore this file, it allows for running on heroku
 UserLoginPackage.py
 - This file allows to have a user login, please visit the system documentation for more information
 main.py
 - This is the file that connects everything there is a lot to it so, please visit the system documentation for more information
-readme.md
-- Please ignore, this is just a readme with no useful info in it.
-requirements.txt
-- Please ingore, it just gives requirements for heroku to use.
 script.py
-- Not sure maybe Ethan will know more about it since he wrote it.
+- These are tests for our code. They get run before our pipeline gets deployed.
 
 In the templates/ folder is all of our code for the html of the project.
-In this directory you will find.
+In this directory you will find:
 
-Managerpage.html
+Managerpage.html:
 - This page is the managers page where they can order new products, create sales and see their profits.
-POS.html
+POS.html:
 - This page is the main page where the cashier can make sales and add things to a cart
-checkout.html
+checkout.html:
 - This page is where they are shown the cart and are able to pay for things.
-emailSearchResults.html
+emailSearchResults.html:
 - This gives all the emails back from the database
-inventory.html
+inventory.html:
 - This will give all of the inventory items in the database
-profitReport.html
+profitReport.html:
 - Not sure what to put here?
-transactions.html
+transactions.html:
 - This will give a list of transactions that have happened within the POS system
 
 In the ProcessStuff/ directory don't worry about that, it just has information like previous turn ins for our group.
@@ -53,9 +53,9 @@ In the ProcessStuff/ directory don't worry about that, it just has information l
 In the static/ directory there is just a css file that gives us better looking html for the POS page.
 
 In the OneOffScripts/ directory, there are scripts
-OneOff.py
+OneOff.py:
 - This script added products to the inventory for us so we only had to do 1 query not 50
-OneOffInventoryLog.py
+OneOffInventoryLog.py:
 - Pretty much the same as above, allowed us to write this instead of doing 50 separate queries.
 
 These don't really affect our code base that much but still worth mentioning.

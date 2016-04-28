@@ -37,7 +37,7 @@ Click "Check Out" when you are done adding things to the cart.
 This will take you to a new page. On this page you will see a few things.
 On the left hand side of the screen you should see everything that was in your cart in that list.
 
-On the right side you should see 2 ways to pay. Choose one! You will also see an email box, feel free to enter your email or not its optional!
+On the right side you should see 2 ways to pay. Choose one! You will also see an email box, feel free to enter your email or don't if you don't want too. Its optional!
 
 Enter you amount either on the credit card or with cash. And click submit!
 
