@@ -2,8 +2,9 @@ Project Report.
 
 First we will go over what we have delivered, we will go over each priority and tell what we have delivered.
 
+
 High Priority:
-We have output that is readable, but we weren't able to get it into csv format for inputting into Excel
+We have output that is readable, and available in csv format for inputting into Excel
 As a manager you are able to generate weekly sales and profit reports.
 As a manager you can input sale prices from the manager page.
 As a manager you are able to override products and set them to what the manager wants.
@@ -27,6 +28,9 @@ The product runs on https://cryptic-crag-17136.herokuapp.com
 Which will ask you to log in, you can log into this with your assigned
 username and password
 
+Something to note: If you have manager credentials when you sign in you will be taken to https://cryptic-crag-17136.herokuapp.com/managerPage
+otherwise you will be taken to the pos page. 
+
 After logging in you will be taken to https://cryptic-crag-17136.herokuapp.com/pos this page is the page that the cashier will see when using the product.
 We will give a brief overview of the pos page.
 
@@ -44,8 +48,8 @@ This is the cart that keeps track of what the customer is buying. The cashier en
 The cart will keep track of the total amount as well.
 
 Moving on..
-After the customer has no items left we can move on to the checkout page, you should see a familiar table on the right, all of the items
-that were in the cart should be in the table on this page.
+After the customer has no items left we can move on to the checkout page, you should see a familiar table on the left side of the screen, all of the items that were in the cart on the previous page should be in the table on this page.
+
 The customer can pay either with cash or credit, and after you enter the respective information in the fields the cashier can hit submit and will
 create a transaction that goes in the database.
 You can also ask your customer for their email and name, if they say no don't worry, its optional!
