@@ -10,40 +10,7 @@ Password: ThisIsAPassword
 
 Enter those credentials in the username and password fields.
 
-After you log in you will be taken to the http://cryptic-crag-17136.herokuapp.com/pos page.
-Overview of the POS page:
-On the left side of the screen you will see buttons that say "Manager Page", "Log Out" and "Inventory"
-
-Manager Page: This will take you to the manager page, if you have the right credentials (You will)
-
-Log Out: Does exactly what it says!
-
-Inventory: This will give you a rendered template of all the inventory items and info with them.
-
-Looking to the right a bit you will see an empty box, with a drop down menu, you can use this to search for something in the inventory.
-Try it out!
-use "Hot" for the top box, and select product name in the drop down menu.
-"18	Hot Dogs	Oscar Meyer	2.00" should show up in the table below.
-
-The next box over, is the cart.
-The two empty boxes under that are product id and quantity like the labels suggest. If you try out,
-15 for the product id
-2 for the quantity
-"15	Cheese	2  4.30" should show up in the cart above! Feel free to add whatever else you want in the cart!
-Your total amount in the cart will show up in the Total Amount space. Your total amount reflects the price you owe when you checkout.
-
-Click "Check Out" when you are done adding things to the cart.
-
-This will take you to a new page. On this page you will see a few things.
-On the left hand side of the screen you should see everything that was in your cart in that list.
-
-On the right side you should see 2 ways to pay. Choose one! You will also see an email box, feel free to enter your email or don't if you don't want too. Its optional!
-
-Enter you amount either on the credit card or with cash. And click submit!
-
-After you check out you will be taken back to the pos page, where you can start again with a new customer.
-
-Now we can go look at the manager page! Click the "Manager Page" button on the left hand side of the screen.
+After you log in you will be taken to the http://cryptic-crag-17136.herokuapp.com/managerPage page. Since you have manager credentials
 
 On this page you will see a lot of things,
 
@@ -79,4 +46,38 @@ If you do the same search as above for 100 you will see the updated product in t
 On the right hand of the screen you will see a table with items in it. This table generates a product order for you. It will search the database
 for items that you are low on and will show them in this screen. You can click the order button and you will order more!
 
-That is all for the testing instructions please feel free to play around with our product!
+If you click the "Cashier Page" it will take you to http://cryptic-crag-17136.herokuapp.com/pos. Testing instructions for the pos pager ar underneath.
+
+Overview of the POS page:
+On the left side of the screen you will see buttons that say "Manager Page", "Log Out" and "Inventory"
+
+Manager Page: This will take you to the manager page, if you have the right credentials (You will)
+
+Log Out: Does exactly what it says!
+
+Inventory: This will give you a rendered template of all the inventory items and info with them.
+
+Looking to the right a bit you will see an empty box, with a drop down menu, you can use this to search for something in the inventory.
+Try it out!
+use "Hot" for the top box, and select product name in the drop down menu.
+"18	Hot Dogs	Oscar Meyer	2.00" should show up in the table below.
+
+The next box over, is the cart.
+The two empty boxes under that are product id and quantity like the labels suggest. If you try out,
+15 for the product id
+2 for the quantity
+"15	Cheese	2  4.30" should show up in the cart above! Feel free to add whatever else you want in the cart!
+Your total amount in the cart will show up in the Total Amount space. Your total amount reflects the price you owe when you checkout.
+
+Click "Check Out" when you are done adding things to the cart.
+
+This will take you to a new page. On this page you will see a few things.
+On the left hand side of the screen you should see everything that was in your cart in that list.
+
+On the right side you should see 2 ways to pay. Choose one! You will also see an email box, feel free to enter your email or don't if you don't want too. Its optional!
+
+Enter you amount either on the credit card or with cash. And click submit!
+
+After you check out you will be taken back to the pos page, where you can start again with a new customer.
+
+
