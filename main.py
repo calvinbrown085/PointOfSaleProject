@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 from Database import Database
 from UserLoginPackage import *
 from DatabaseUtils import *
+from SecretKeyGenerator import generateKey
 import os
 from Errors import *
 
@@ -13,29 +14,23 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    #DEBUG=True,
-    SECRET_KEY= """os.environ["Key"]"""))
+    # DEBUG=True,
+    SECRET_KEY= generateKey()))
 
 @app.route("/")
 def singleSlash():
     if (not session.get("logged_in")):
         return redirect("/login")
     else:
-        return redirect("/index")
-
-@app.route("/index")
-def index():
-    return render_template("index.html")
+        if (db.getManagerStatus()[0][0] == 1):
+            return redirect("/pos")
+        else:
+            return redirect("/managerPage")
 
 @app.route("/managerPage")
 def managerPage():
-    return render_template("Managerpage.html", items = session.get("managerSearchList"),lowInv = db.getItemsWithLowInventory())
-
-@app.route("/form", methods=["POST"])
-def form():
-    email = request.form["email"]
-    db.storeEmail(email)
-    return redirect("/")
+    requireManagerLogin(db)
+    return render_template("Managerpage.html", items = session.get("managerSearchList"),results = db.getItemsWithLowInventory())
 
 @app.route("/writeEmail")
 def writeEmail():
@@ -44,26 +39,21 @@ def writeEmail():
     db.writeEmailToDatabase(name,email)
     return redirect("/checkout")
 
-@app.route("/writeTransaction", methods=["POST"])
-def writeTransaction():
-    return "This is a stub to be filled in later"
-
-@app.route("/writeNewInventoryItem", methods=["POST"])
-def writeNewInventoryItem():
-    return "This is a stub to be filled in later"
-
 @app.route("/searchInventoryById", methods=["POST"])
 def searchById():
+    requireLogin()
     results = db.getById(str(request.form["idSearch"]))
     return render_template("searchResults.html", results = results)
 
 @app.route("/searchInventoryByName", methods=["POST"])
 def searchByName():
+    requireLogin()
     results = db.getByName(str(request.form["nameSearch"]))
     return render_template("searchResults.html", results = results)
 
 @app.route("/searchEmailsByName", methods=["POST"])
 def searchEmailsByName():
+    requireLogin()
     results = db.getUser(str(request.form["emailNameSearch"]))
     return render_template("emailSearchResults.html", results = results)
 
@@ -75,6 +65,7 @@ def inventory():
 
 @app.route("/emailList")
 def emails():
+    requireLogin()
     return render_template("emailSearchResults.html", results = db.getEmailsInSystem())
 
 @app.route("/login", methods=["GET","POST"])
@@ -88,13 +79,11 @@ def signOut():
 @app.route("/secret")
 def secret():
     requireLogin()
-    print(session.get("logged_in"))
     return "Logged in!!"
 
 @app.route("/superSecret")
 def superSecret():
     requireManagerLogin(db)
-    print(session.get("logged_in"))
     return "Manager Logged in!!"
 
 @app.route("/pos")
@@ -135,20 +124,22 @@ def closeError():
 
 @app.route("/checkout")
 def checkout():
+    requireLogin()
     session["error"] = ""
     return render_template("checkout.html", results = session.get("resultList"), totalPrice = session.get("totalAmount"))
 
 @app.route("/payment")
 def payment():
+    requireLogin()
     cash = request.args.get('cashAmount')
     cardNumber = request.args.get('cardNumber')
     exp = request.args.get('exp')
     cvv = request.args.get('CVV')
     itemList = []
     paymentMethod = ""
-    if(cash != None):
+    if (cash != None):
         paymentMethod = "Cash"
-    elif(cardNumber != None):
+    elif (cardNumber != None):
         paymentMethod = "Credit"
     for item in session.get("resultList"):
         itemList.append(item[1])
@@ -157,7 +148,6 @@ def payment():
     for item in session.get("resultList"):
         db.sellItem(item[0],item[2])
         db.updateInventoryLog(item[0],item[2])
-
     session["resultList"] = []
     session["totalAmount"] = 0.00
     session["searchList"] = []
@@ -166,6 +156,7 @@ def payment():
 
 @app.route("/search")
 def search():
+    requireLogin()
     userInput = request.args.get('ItemNumber')
     userInput = userInput.title()
     searchBy = request.args.get('items')
@@ -186,11 +177,12 @@ def search():
     return redirect("/pos")
 @app.route("/profitReport")
 def profitReport():
-    requireLogin()
+    requireManagerLogin(db)
     return render_template("profitReport.html", report = generateReport())
 
 @app.route("/managerSearch")
 def managerSearch():
+    requireManagerLogin(db)
     searchType = request.args.get('ProductID')
     userInput = request.args.get('text')
     userInput = userInput.title()
@@ -206,6 +198,7 @@ def managerSearch():
 
 @app.route("/createSale")
 def createManagerSale():
+    requireManagerLogin(db)
     productId = request.args.get('productId')
     newSalePrice = request.args.get('newPrice')
     createSale(productId, newSalePrice)
@@ -213,6 +206,7 @@ def createManagerSale():
 
 @app.route("/cartClear")
 def clearCart():
+    requireLogin()
     session["resultList"] = []
     session["totalAmount"] = 0.00
     session["error"] = ""
@@ -221,6 +215,7 @@ def clearCart():
 
 @app.route("/managerUpdate")
 def managerUpdate():
+    requireManagerLogin(db)
     productId = request.args.get('productId')
     name = request.args.get('Name')
     purchasePrice = request.args.get('purchasePrice')
@@ -257,7 +252,7 @@ def managerUpdate():
 
 @app.route("/transactions")
 def transactions():
-    print(db.getTransactions())
+    requireManagerLogin(db)
     return render_template("transactions.html", transactions = db.getTransactions())
 
 @app.route("/orderMoreProducts")
@@ -270,9 +265,6 @@ def productOrder():
         db.updateInventoryLogItemsPurchased(int(item[1]),int(amount))
         db.orderNewProducts(int(item[1]), int(amount))
     return redirect("/managerPage")
-
-
-
 
 if (__name__ == "__main__"):
     app.run()
