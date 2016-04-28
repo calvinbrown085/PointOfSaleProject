@@ -168,7 +168,7 @@ test_logout, makes sure the logout endpoint is up and running.
 
 
 
-Database Information(Data) -
+Database Information(Data) - Our database is also hosted on heroku, it is accessed through our code using heroku toolbelt. 
 Overview: This will cover what tables are in the database and more information about each table in depth.
 There are 5 tables in the database we will go into more depth about them below.
 customer_emails:
