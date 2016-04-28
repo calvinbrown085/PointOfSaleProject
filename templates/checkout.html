@@ -135,6 +135,14 @@
    		<input type="text" name="cashAmount"><br></input>
    		<input type="submit" value="Submit">
  	</form>
+  <div align = "left" style="color:red">
+    <form action="/closeError" method="post">
+    {{errorText}}
+    {% if errorText != "" %}
+      <input type="submit" value="close"></input>
+    {% endif %}
+  </form>
+  </div>
 
  	<br><br>
 

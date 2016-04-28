@@ -6,3 +6,6 @@ def invalidAmount():
 
 def insufficientInventory():
     return "Sorry we don't have that many in stock"
+
+def notEnoughMoney():
+    return "Sorry that's not enough to pay for your items"

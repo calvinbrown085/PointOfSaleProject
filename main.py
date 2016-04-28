@@ -14,7 +14,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    # DEBUG=True,
+    DEBUG=True,
     SECRET_KEY= generateKey()))
 
 @app.route("/")
@@ -125,20 +125,24 @@ def closeError():
 @app.route("/checkout")
 def checkout():
     requireLogin()
-    session["error"] = ""
-    return render_template("checkout.html", results = session.get("resultList"), totalPrice = session.get("totalAmount"))
+    return render_template("checkout.html", results = session.get("resultList"), totalPrice = session.get("totalAmount"), errorText = session.get("error"))
 
 @app.route("/payment")
 def payment():
     requireLogin()
+    session["error"] = ""
     cash = request.args.get('cashAmount')
     cardNumber = request.args.get('cardNumber')
     exp = request.args.get('exp')
     cvv = request.args.get('CVV')
     itemList = []
     paymentMethod = ""
+
     if (cash != None):
         paymentMethod = "Cash"
+        if(float(cash) != float(session.get("totalAmount"))):
+            session["error"] = notEnoughMoney()
+            return redirect("/checkout")
     elif (cardNumber != None):
         paymentMethod = "Credit"
     for item in session.get("resultList"):
@@ -151,6 +155,7 @@ def payment():
     session["resultList"] = []
     session["totalAmount"] = 0.00
     session["searchList"] = []
+    session["error"] = ""
     return redirect("/pos")
 
 
