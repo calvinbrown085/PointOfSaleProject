@@ -30,7 +30,7 @@ def singleSlash():
 @app.route("/managerPage")
 def managerPage():
     requireManagerLogin(db)
-    return render_template("Managerpage.html", items = session.get("managerSearchList"),results = db.getItemsWithLowInventory())
+    return render_template("Managerpage.html", items = session.get("managerSearchList"),lowInv = db.getItemsWithLowInventory())
 
 @app.route("/writeEmail")
 def writeEmail():
