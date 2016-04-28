@@ -27,23 +27,8 @@ def singleSlash():
 
 @app.route("/managerPage")
 def managerPage():
-<<<<<<< HEAD
     requireManagerLogin(db)
     return render_template("Managerpage.html", items = session.get("managerSearchList"),results = db.getItemsWithLowInventory())
-
-@app.route("/writeEmail", methods=["POST"])
-def writeEmail():
-    requireLogin()
-    newCustomer(str(request.form["customer_name"]),str(request.form["customer_email"]))
-    return redirect("/")
-=======
-    return render_template("Managerpage.html", items = session.get("managerSearchList"),lowInv = db.getItemsWithLowInventory())
-
-@app.route("/form", methods=["POST"])
-def form():
-    email = request.form["email"]
-    db.storeEmail(email)
-    return redirect("/")
 
 @app.route("/writeEmail")
 def writeEmail():
@@ -51,7 +36,6 @@ def writeEmail():
     email = request.args.get('exp')
     db.writeEmailToDatabase(name,email)
     return redirect("/checkout")
->>>>>>> master
 
 @app.route("/searchInventoryById", methods=["POST"])
 def searchById():
