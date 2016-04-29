@@ -9,3 +9,6 @@ def insufficientInventory():
 
 def notEnoughMoney():
     return "Sorry that's not enough to pay for your items"
+
+def cartCantBeEmpty():
+    return "Sorry your cart can't be empty"
