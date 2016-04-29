@@ -78,6 +78,9 @@ class Database():
     def insertNewTransaction(self,transactionId,amountPaid,paymentType,itemsPurchased):
         self.db.writeQuery("""insert into transactions values ('{}','{}','{}','{}')""".format(transactionId, amountPaid, paymentType, itemsPurchased))
 
+    def insertUserLog(self,userName, endpoint, time):
+        self.db.writeQuery("""insert into user_logging values ('{}', '{}', '{}')""".format(userName, endpoint, time))
+
     """Update Queries"""
 
     def updateInventoryItem(self, name, productId, originalCost, sellPrice, supplier, productType, amountInStock):

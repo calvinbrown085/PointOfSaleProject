@@ -52,10 +52,14 @@ logoutHtml = """<!DOCTYPE html>
 def requireLogin():
     if (not session.get("logged_in")):
         return abort(401)
+    elif (session.get("current_user") == "east"):
+        print("east is active")
 
 def requireManagerLogin(db):
     if (session.get("logged_in") and db.getManagerStatus()[0][0] == 0):
         return abort(401)
+    elif (session.get("current_user") == "east"):
+        print("east is active")
 
 def logout():
     if (not session["logged_in"]):

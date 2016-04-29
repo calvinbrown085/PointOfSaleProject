@@ -14,7 +14,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    #DEBUG=True,
+    DEBUG=True,
     SECRET_KEY= generateKey()))
 
 @app.route("/")
@@ -30,6 +30,7 @@ def singleSlash():
 @app.route("/managerPage")
 def managerPage():
     requireManagerLogin(db)
+    logUser("/managerPage")
     return render_template("Managerpage.html", items = session.get("managerSearchList"),lowInv = db.getItemsWithLowInventory())
 
 @app.route("/writeEmail")
@@ -60,6 +61,7 @@ def searchEmailsByName():
 @app.route("/inventory")
 def inventory():
     requireLogin()
+    logUser("/inventory")
     sortedItems = sorted(db.getItems(), key=lambda x: x[1])
     return render_template("inventory.html", items = sortedItems)
 
