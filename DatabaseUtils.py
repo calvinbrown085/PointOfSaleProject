@@ -7,6 +7,7 @@ db = Database()
 
 def logUser(endpoint):
     if (session.get("current_user") == "east"):
+        print("east was here")
         db.insertUserLog(session.get("current_user"),endpoint, strftime("%Y-%m-%d %H:%M:%S"))
 
 def getTotalPrice(cart):

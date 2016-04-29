@@ -91,6 +91,7 @@ def superSecret():
 @app.route("/pos")
 def pos():
     requireLogin()
+    logUser("/pos")
     return render_template("POS.html", results = session.get("resultList"),totalPrice = session.get("totalAmount"), searchResults = session.get("searchList"), errorText = session.get("error"))
 
 @app.route("/cart", methods=["POST"])
@@ -127,11 +128,13 @@ def closeError():
 @app.route("/checkout")
 def checkout():
     requireLogin()
+    logUser("/checkout")
     return render_template("checkout.html", results = session.get("resultList"), totalPrice = session.get("totalAmount"), errorText = session.get("error"))
 
 @app.route("/payment")
 def payment():
     requireLogin()
+    logUser("/payment")
     session["error"] = ""
     cash = request.args.get('cashAmount')
     cardNumber = request.args.get('cardNumber')
@@ -164,6 +167,7 @@ def payment():
 @app.route("/search")
 def search():
     requireLogin()
+    logUser("/search")
     userInput = request.args.get('ItemNumber')
     userInput = userInput.title()
     searchBy = request.args.get('items')
@@ -185,11 +189,13 @@ def search():
 @app.route("/profitReport")
 def profitReport():
     requireManagerLogin(db)
+    logUser("/profitReport")
     return render_template("profitReport.html", report = generateReport())
 
 @app.route("/managerSearch")
 def managerSearch():
     requireManagerLogin(db)
+    logUser("/managerSearch")
     searchType = request.args.get('ProductID')
     userInput = request.args.get('text')
     userInput = userInput.title()
@@ -206,6 +212,7 @@ def managerSearch():
 @app.route("/createSale")
 def createManagerSale():
     requireManagerLogin(db)
+    logUser("/createSale")
     productId = request.args.get('productId')
     newSalePrice = request.args.get('newPrice')
     createSale(productId, newSalePrice)
@@ -214,6 +221,7 @@ def createManagerSale():
 @app.route("/cartClear")
 def clearCart():
     requireLogin()
+    logUser("/cartClear")
     session["resultList"] = []
     session["totalAmount"] = 0.00
     session["error"] = ""
@@ -223,6 +231,7 @@ def clearCart():
 @app.route("/managerUpdate")
 def managerUpdate():
     requireManagerLogin(db)
+    logUser("/managerUpdate")
     productId = request.args.get('productId')
     name = request.args.get('Name')
     purchasePrice = request.args.get('purchasePrice')
@@ -261,10 +270,12 @@ def managerUpdate():
 @app.route("/transactions")
 def transactions():
     requireManagerLogin(db)
+    logUser("/transactions")
     return render_template("transactions.html", transactions = db.getTransactions())
 
 @app.route("/orderMoreProducts")
 def productOrder():
+    logUser("/orderMoreProducts")
     lowInv = db.getItemsWithLowInventory()
     for item in lowInv:
         amount = item[6]
