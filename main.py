@@ -122,6 +122,12 @@ def closeError():
     session["error"] = ""
     return redirect("/pos")
 
+
+@app.route("/checkoutError", methods=["POST"])
+def checkoutError():
+    session["error"] = ""
+    return redirect("/checkout")
+
 @app.route("/checkout")
 def checkout():
     requireLogin()
