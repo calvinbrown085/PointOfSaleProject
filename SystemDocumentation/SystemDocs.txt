@@ -105,7 +105,7 @@ users cart.
 @app.route("/checkout")
 This method leads the cashier from the cart to the checkout page. This route renders the checkout page
 
-@app.route("/methodOfPayment")
+@app.route("/payment")
 Here we have the last method for the cashier to hit, this method will accept a form of payment for the items on the checkout page. After
 the cashier has entered payment it will clear the cart and the total for the current person.
 
@@ -128,6 +128,20 @@ This does the same thing as before, but it searches the database for the manager
 @app.route("/createSale")
 This will create sales and lower or give price decreases on products in the database. Only the manager can access this functionality.
 
+@app.route("/closeError")
+This will close the error message that shows up on the page
+
+@app.route("/orderMoreProducts")
+This route allows the manager to order more products
+
+@app.route("/transactions")
+This route will show the transactions that are in the database for the manager
+
+@app.route("/managerUpdate")
+This route will show update or add a new product to the database depending on what they choose
+
+@app.route("/cartClear")
+This route will clear the customers cart on the pos page. 
 
 UserLoginPackage.py -
 Overview: This code allows us to make users and create session objects for those users and allow them to log in and use the system.
