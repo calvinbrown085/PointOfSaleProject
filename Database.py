@@ -91,7 +91,7 @@ class Database():
 
     def updateInventoryLogItemsPurchased(self, productId,howManyRecieved):
         inventoryLogGet = self.getFromInventoryLogByProductId(productId)
-        amountBought =  inventoryLogGet[0][2] + int(howManyRecieved)
+        amountBought =  inventoryLogGet[0][1] + int(howManyRecieved)
         self.db.writeQuery("""update inventory_log set products_recieved = '{}' where product_id = '{}'""".format(amountBought, productId))
 
     def orderNewProducts(self,productId, howManyPurchased):
