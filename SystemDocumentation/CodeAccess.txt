@@ -6,7 +6,7 @@ Below this will be a brief explanation of each file.
 
 For easy instructions on printing the files in the
 root directory you need to print would be:
-Database.py, DatabaseUrlGenerator.py, DatabaseUtils.py, DbConnection.py, UserLoginPackage.py, main.py, script.py
+Database.py, DatabaseUrlGenerator.py, DatabaseUtils.py, DbConnection.py, UserLoginPackage.py, main.py, script.py,Errors.py
 
 In the templates/ folder for printing:
 inventory.html, Managerpage.html, POS.html, inventory.html, transactions.html
@@ -27,7 +27,9 @@ UserLoginPackage.py
 main.py
 - This is the file that connects everything there is a lot to it so, please visit the system documentation for more information
 script.py
-- These are tests for our code. They get run before our pipeline gets deployed.
+- These are tests for our code. They get run in our pipeline before our application gets deployed to heroku.
+Errors.py
+- This file just defines our error messages we use in our code. 
 
 In the templates/ folder is all of our html code for the project.
 In this directory you will find:
