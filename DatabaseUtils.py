@@ -15,6 +15,7 @@ def logUser(endpoint):
 def writeUserStuff():
     for i in x:
         db.insertUserLog(i[0],i[1], i[2])
+    x = []
 
 
 def getTotalPrice(cart):
