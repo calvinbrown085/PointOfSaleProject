@@ -14,7 +14,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    # DEBUG=True,
+    DEBUG=True,
     SECRET_KEY= generateKey()))
 
 @app.route("/")

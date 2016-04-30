@@ -2,20 +2,21 @@ from Database import Database
 from random import randint
 from time import strftime
 from flask import session
+from UserLogger import Logger
 
 db = Database()
 
-x = []
+x = Logger()
 
 def logUser(endpoint):
     if (session.get("current_user") == "east"):
         print("east was here")
-    x.append((session.get("current_user"),endpoint,strftime("%Y-%m-%d %H:%M:%S")))
+    x.logUser(session.get("current_user"),endpoint,strftime("%Y-%m-%d %H:%M:%S"))
 
 def writeUserStuff():
-    for i in x:
+    for i in x.getUserLog():
         db.insertUserLog(i[0],i[1], i[2])
-    x = []
+    x.resetLogs()
 
 
 def getTotalPrice(cart):

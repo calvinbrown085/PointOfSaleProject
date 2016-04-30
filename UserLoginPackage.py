@@ -85,7 +85,7 @@ def login(db):
                     session["managerSearchList"] = []
                     session["searchList"] = []
                     session["error"] = ""
-                    if (db.getManagerStatus()[0][0] == 1):
+                    if (db.getManagerStatus()[0][0] > 0):
                         return redirect("/managerPage")
                     else:
                         return redirect("/pos")
