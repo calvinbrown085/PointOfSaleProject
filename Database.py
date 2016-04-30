@@ -48,6 +48,9 @@ class Database():
     def getTransactions(self):
         return self.db.readQuery("""select * from transactions""")
 
+    def getUserLogs(self):
+        return self.db.readQuery("""select * from user_logging""")
+
     """User Queries"""
 
     def getUser(self, username):

@@ -14,7 +14,7 @@ totalAmount = 0
 products = []
 
 app.config.update(dict(
-    DEBUG=True,
+    # DEBUG=True,
     SECRET_KEY= generateKey()))
 
 @app.route("/")
@@ -299,8 +299,13 @@ def productOrder():
 @app.route("/admin")
 def admin():
     requireAdminLogin(db)
+    return render_template("admin.html", userResults = db.getUserLogs())
+
+@app.route("/updateUserLogs", methods=["POST"])
+def updateUserLogs():
+    requireAdminLogin(db)
     writeUserStuff()
-    return "Complete!"
+    return redirect("/admin")
 
 if (__name__ == "__main__"):
     app.run()

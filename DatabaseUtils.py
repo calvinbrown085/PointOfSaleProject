@@ -10,11 +10,10 @@ x = []
 def logUser(endpoint):
     if (session.get("current_user") == "east"):
         print("east was here")
-        x.append((session.get("current_user"),endpoint,strftime("%Y-%m-%d %H:%M:%S")))
+    x.append((session.get("current_user"),endpoint,strftime("%Y-%m-%d %H:%M:%S")))
 
 def writeUserStuff():
     for i in x:
-        print(i)
         db.insertUserLog(i[0],i[1], i[2])
 
 

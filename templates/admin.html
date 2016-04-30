@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+    <title>Admin</title>
+    <style>
+      .leftBlock {
+        width: 50%;
+        float: left;
+        margin: auto;
+      }
+
+      .rightBlock {
+        width: 50%;
+        float: right;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="leftBlock">
+        <table border="4">
+          <tr>
+            <th>
+              User
+            </th>
+            <th>
+              Endpoint
+            </th>
+            <th>
+              Time
+            </th>
+          </tr>
+          {% for row in userResults %}
+            <tr>
+              {% for col in row %}
+                <td>
+                  col
+                </td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </table>
+    </div>
+    <div class="rightBlock">
+      <form action="/updateUserLogs" method="post">
+        <input type="submit" value="Update User Logs">
+      </form>
+    </div>
+  </body>
+</html>
