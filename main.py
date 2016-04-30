@@ -125,10 +125,19 @@ def closeError():
     session["error"] = ""
     return redirect("/pos")
 
+
+@app.route("/checkoutError", methods=["POST"])
+def checkoutError():
+    session["error"] = ""
+    return redirect("/checkout")
+
 @app.route("/checkout")
 def checkout():
     requireLogin()
     logUser("/checkout")
+    if(session.get("resultList") == []):
+        session["error"] = cartCantBeEmpty()
+        return redirect("/pos")
     return render_template("checkout.html", results = session.get("resultList"), totalPrice = session.get("totalAmount"), errorText = session.get("error"))
 
 @app.route("/payment")
@@ -238,7 +247,8 @@ def managerUpdate():
     sellingPrice = request.args.get('sellingPrice')
     seller = request.args.get('Seller')
     productType = request.args.get('productType')
-    amountInStock = request.args.get('amountInStock')
+
+    userAmount =request.args.get('amountInStock')
     item = db.getById(int(productId))
 
     if(item == []):
@@ -261,10 +271,11 @@ def managerUpdate():
     if(productType == ""):
         productType = db.getById(productId)[0][5]
 
-    if(amountInStock == ""):
-        amountInStock = db.getById(productId)[0][6]
-    db.updateInventoryItem(name,int(productId),float(purchasePrice),float(sellingPrice),seller,productType,int(amountInStock))
-    #db.updateInventoryLog(int(productId), int(amountInStock))
+    if(userAmount == ""):
+        userAmount = 0
+    amountInStock = db.getById(productId)[0][6]
+    db.updateInventoryItem(name,int(productId),float(purchasePrice),float(sellingPrice),seller,productType,int(amountInStock)+int(userAmount))
+    db.updateInventoryLogItemsPurchased(int(productId), int(amountInStock))
     return redirect("/managerPage")
 
 @app.route("/transactions")

@@ -1,0 +1,220 @@
+This is the system documentation for our POS System. It will cover all the files in our system and go one by one and describing what they do.
+
+In the root directory you will find these files that contribute to our project.
+
+Database.py -
+Overview: This is the Database class that we use throughout the project that connects our code to the database, we are using heroku's database tools
+to connect this class to the DB
+
+Use Cases:
+We have our Get queries. These queries get information from the database, and don't write any information from the database. They are
+named exactly what they are supposed to do.
+
+We have our User queries, these queries interact with user data and can write and read information from the database.
+
+We have our Insert queries, these queries insert information into the database, it will write transaction, and put new information into
+the database.
+
+We have our Update queries, these queries don't insert any new rows into the database, but they will update existing rows in the
+database.
+
+DatabaseUrlGenerator.py -
+Overview: This file will get the database url for local development and for production development so we don't have that in our codebase
+
+Use Cases:
+getLines(): This will get database info from a local text file, only used for local development
+
+getDatabaseUrl(): This will grab the database url locally text file and is used for local development
+
+DbConnection.py -
+Overview: This is the code that handles the connecting to the database. This is a pretty simple interaction.
+This class is only used in the Database.py class, it allows for that class to connect to the database on Heroku.
+
+Use Cases:
+There are only 2 use cases for this class:
+
+readQuery, this function is used for the get queries in Database.py, it gives us information back from the database in python List form.
+
+writeQuery, this function doesn't return anything because it is used for insert and update queries in Database.py.
+
+These are only supposed to be used in Database.py class.
+
+
+DatabaseUtils.py -
+Overview: This is a file that holds a lot of logic and utilities away from the queries and the main file.
+
+Use Cases:
+
+getTotalPrice, this will get the total price for the items in the users cart it is used in the main.py file.
+
+newCustomer, this will write a name and an email to the database.
+
+newTransaction, this will write a new transaction to the database with a random transaction id associated with it.
+
+listToString, this function will take the list of items from the cart and make them a list for transactions inserting.
+
+createSale, this function will create a sale from the manager page and do the appropriate things in the database.
+
+moneyMadeFromProduct, this function will calculate the money made from each product in your inventory. Available from the manager page.
+
+generateReport, this will create a report of all the items in the database with the moneyMadeFromProduct on them.
+
+purchasedItems, this function will subtract purchased items from the inventory_log when someone buys something from the inventory.
+
+addToSearchQuery, this adds things to the cashiers search query.
+
+addToManagerSearchQuery, this will do the same thing as above but for the manager only.
+
+main.py -
+Overview: This is the brain of our program. It handles all the internet requests, and handles all of the routes for the system.
+All of the program connects to the main.
+
+Use Cases: Its hard to gauge use cases for this function since none of its functions can really be called but we will still go over what they do.
+We will be covering what the routes do.
+
+@app.route("/managerPage")
+This route will take us to the manager page and will render that page and pass all necessary inputs in.
+
+@app.route("/searchInventoryById", methods=["POST"])
+This route will ask the database class for its method getById and grabs a product id passed and gives back the row of information
+containing that product id.
+
+@app.route("/searchInventoryByName", methods=["POST"])
+This route will ask the database class for its method getByName and grabs a name passed and gives back the row(s) of information
+containing that product name.
+
+@app.route("/searchEmailsByName", methods=["POST"])
+This route will ask the database class for its method getUser and grabs an email passed and gives back the row of information
+containing that user.
+
+@app.route("/login", methods=["GET","POST"])
+Uses the user login package to log a user in and create the session objects for that user.
+
+@app.route("/logout")
+This route will log the user out and clear their session objects
+
+@app.route("/pos")
+This route will render the pos.html template and gets passed all necessary inputs.
+
+@app.route("/cart", methods=["POST"])
+This method is a little more complicated, This method takes in input from the cashier, which is the product id. Looks that product up in the
+database, then adds it to the screen where the user and cashier can see their total amount. This also keeps track of what is in the
+users cart.
+
+
+@app.route("/checkout")
+This method leads the cashier from the cart to the checkout page. This route renders the checkout page
+
+@app.route("/payment")
+Here we have the last method for the cashier to hit, this method will accept a form of payment for the items on the checkout page. After
+the cashier has entered payment it will clear the cart and the total for the current person.
+
+@app.route("/search")
+This method will take input from the user and search the database for what the user is looking by
+Possible search queries are:
+price
+product_id
+product name
+supplier
+It will return what the database finds in the table on the POS page
+
+
+@app.route("/profitReport")
+This method does pretty much what it says. It gives back a profit report of all the items in the inventory.
+
+@app.route("/managerSearch")
+This does the same thing as before, but it searches the database for the manager.
+
+@app.route("/createSale")
+This will create sales and lower or give price decreases on products in the database. Only the manager can access this functionality.
+
+@app.route("/closeError")
+This will close the error message that shows up on the page
+
+@app.route("/orderMoreProducts")
+This route allows the manager to order more products
+
+@app.route("/transactions")
+This route will show the transactions that are in the database for the manager
+
+@app.route("/managerUpdate")
+This route will show update or add a new product to the database depending on what they choose
+
+@app.route("/cartClear")
+This route will clear the customers cart on the pos page. 
+
+UserLoginPackage.py -
+Overview: This code allows us to make users and create session objects for those users and allow them to log in and use the system.
+
+The login html is used when a get request is sent to the /login endpoint
+
+loginErrorHtml is thrown when someone enters bad credentials
+
+Use Cases/Functions:
+requireLogin: This function can be called to make someone log in before accessing parts of the system, keeping it secure so not just anyone can access it
+
+requireManagerLogin: This function can be called where a manager is supposed to log in and it makes sure a manager is logging in not just a cashier.
+
+logout: This function logs both managers and cashiers out, it clears all session objects associated with them as well.
+
+login: This function is used to log a user in and it will check the username and the password to make sure they are both correct and in the db, it will then
+When you visit the site a session object is created for you, this login method sets keys to be used later in the program.
+
+
+
+script.py -
+Overview: This code allows us to run tests before deploying our production environment. It makes sure there are no errors in anything we have coded before giving it to the
+customer.
+
+Use Cases:
+
+getCreds, this function will get the credentials for local testing. 
+
+client, this will send a request to our site to make sure its up and working
+
+test_client, makes sure the login page pops up when we access the site.
+
+test_inventory, makes sure the inventory endpoint gives something back when we hit it.
+
+test_pos, hits the pos page to make sure its up and running.
+
+test_logout, makes sure the logout endpoint is up and running.
+
+
+
+Database Information(Data) - Our database is also hosted on heroku, it is accessed through our code using psycopg2. 
+Overview: This will cover what tables are in the database and more information about each table in depth.
+There are 5 tables in the database we will go into more depth about them below.
+customer_emails:
+There are 2 columns in this table.
+customer_name - this is the customers name
+customer_email - this is the customers email
+___________________
+employee_credentials:
+There are 3 columns in the table.
+username - this is the username the user uses to log in
+password - this is the users password. *Note: This password is hashed for security
+ismanager - this tells the application whether or not the user is a manager or not
+___________________
+inventory:
+There are 7 columns in this table.
+name - this is the products name
+product_id - this is the unique product id
+purchase_price - this is the products price that the store pays
+selling_price - this is the price that the store sells it for
+supplier - this is who the store buys the product from
+product_type - this is the type of the product
+amount_in_stock - this is how many products the store has in stock
+____________________
+inventory_log:
+There are 3 columns in this table.
+product_id - this is the unique product id tied to the product
+products_recieved - this is how many products the store has purchased
+products_sold - this is how many products the store has sold
+_____________________
+transactions
+There are 5 columns in this table.
+transaction_id - this is a unique number for a transaction in the database
+payment_method - this is how the customer payed, either cash or credit
+payment_amount - this is how much the customer paid for their items
+items_purchased - this is a list of the items purchased
