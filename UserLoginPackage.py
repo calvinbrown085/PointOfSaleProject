@@ -58,8 +58,10 @@ def requireLogin():
 def requireManagerLogin(db):
     if (session.get("logged_in") and db.getManagerStatus()[0][0] == 0):
         return abort(401)
-    elif (session.get("current_user") == "east"):
-        print("east is active")
+
+def requireAdminLogin(db):
+    if (session.get("logged_in") and db.getManagerStatus()[0][0] < 2):
+        return abort(404)
 
 def logout():
     if (not session["logged_in"]):

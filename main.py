@@ -296,5 +296,11 @@ def productOrder():
         db.orderNewProducts(int(item[1]), int(amount))
     return redirect("/managerPage")
 
+@app.route("/admin")
+def admin():
+    requireAdminLogin(db)
+    writeUserStuff()
+    return "Complete!"
+
 if (__name__ == "__main__"):
     app.run()
