@@ -14,6 +14,7 @@ def logUser(endpoint):
 
 def writeUserStuff():
     for i in x:
+        print(i)
         db.insertUserLog(i[0],i[1], i[2])
 
 
